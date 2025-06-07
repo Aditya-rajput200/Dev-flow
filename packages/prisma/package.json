@@ -7,11 +7,13 @@
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev --skip-generate",
     "db:deploy": "prisma migrate deploy"
+   
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "dotenv-cli": "^8.0.0",
     "prisma": "^6.9.0"
   },
   "dependencies": {

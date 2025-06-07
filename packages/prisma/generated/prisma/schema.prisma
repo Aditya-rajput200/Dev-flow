@@ -15,17 +15,32 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  id         String    @id @default(cuid())
+  email      String    @unique
+  name       String
+  phone      String    @unique
+  provider   String
+  providerId String
+  sessions   Session[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  password   String
+  avatarUrl  String?
+  role       Role      @default(USER)
+
+  @@unique([provider, providerId])
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  authorId  Int
-  author    User    @relation(fields: [authorId], references: [id])
+model Session {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+  Moderator
 }
