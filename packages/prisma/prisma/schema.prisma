@@ -19,15 +19,26 @@ model User{
   email     String   @unique
   name      String
   phone     String   @unique
-  
-
+  provider  String
+  providerId  String 
+  sessions      Session[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   password  String
   avatarUrl String?
   role     Role      @default(USER)
+
+    @@unique([provider, providerId])
 }
 
+
+model Session {
+  id        String   @id @default(uuid())
+  userId     String?
+  user      User ?    @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
 enum Role {
   USER
   ADMIN
