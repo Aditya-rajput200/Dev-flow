@@ -15,28 +15,17 @@ datasource db {
 }
 
 model User {
-  id         String    @id @default(cuid())
-  email      String    @unique
-  name       String
-  phone      String    @unique
-  provider   String
-  providerId String
-  sessions   Session[]
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  password   String
-  avatarUrl  String?
-  role       Role      @default(USER)
-
-  @@unique([provider, providerId])
-}
-
-model Session {
-  id        String   @id @default(uuid())
-  userId    String?
-  user      User?    @relation(fields: [userId], references: [id])
-  expiresAt DateTime
-  createdAt DateTime @default(now())
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String
+  phone         String?  @unique
+  oauthProvider String?
+  oauthId       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  password      String
+  avatarImg     String?
+  role          Role     @default(USER)
 }
 
 enum Role {

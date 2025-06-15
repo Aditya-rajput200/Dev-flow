@@ -125,20 +125,13 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   name: 'name',
   phone: 'phone',
-  provider: 'provider',
-  providerId: 'providerId',
+  oauthProvider: 'oauthProvider',
+  oauthId: 'oauthId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   password: 'password',
-  avatarUrl: 'avatarUrl',
+  avatarImg: 'avatarImg',
   role: 'role'
-};
-
-exports.Prisma.SessionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  expiresAt: 'expiresAt',
-  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -162,8 +155,7 @@ exports.Role = exports.$Enums.Role = {
 };
 
 exports.Prisma.ModelName = {
-  User: 'User',
-  Session: 'Session'
+  User: 'User'
 };
 
 /**
