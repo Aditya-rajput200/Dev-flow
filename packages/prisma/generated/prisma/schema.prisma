@@ -15,21 +15,114 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(cuid())
-  email         String   @unique
+  id            String         @id @default(cuid())
+  email         String         @unique
   name          String
-  phone         String?  @unique
+  phone         String?        @unique
   oauthProvider String?
   oauthId       String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   password      String
   avatarImg     String?
-  role          Role     @default(USER)
+  role          Role           @default(USER)
+  profile       Profile?
+  following     Follow[]       @relation("follower")
+  followers     Follow[]       @relation("following")
+  posts         Post[]
+  comments      Comment[]
+  notifications Notification[]
+  eventsHosted  Event[]        @relation("EventHost")
+}
+
+model Profile {
+  id           String   @id @default(cuid())
+  bio          String?
+  avatarUrl    String?
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String   @unique
+  githubUrl    String?
+  portfolioUrl String?
+  skills       String[]
+}
+
+model Follow {
+  id          String   @id @default(cuid())
+  follower    User     @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  following   User     @relation("following", fields: [followingId], references: [id])
+  followingId String
+  createdAt   DateTime @default(now())
+}
+
+model Post {
+  id          String     @id @default(cuid())
+  title       String
+  content     String?
+  author      User       @relation(fields: [authorId], references: [id])
+  authorId    String
+  createdAt   DateTime   @default(now())
+  type        PostType   @default(REGULAR)
+  imageUrl    String?
+  videoUrl    String?
+  codeQuery   CodeQuery? @relation("PostToCodeQuery")
+  codeQueryId String?    @unique
+  updatedAt   DateTime   @updatedAt
+  comments    Comment[]
+}
+
+model CodeQuery {
+  id           Int      @id @default(autoincrement())
+  relevantTech String[]
+  errorDetails Json
+  codeSnippet  String
+  post         Post?    @relation("PostToCodeQuery", fields: [postId], references: [id])
+  postId       String?  @unique
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  type      String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  date        DateTime
+  time        DateTime
+  location    String
+  eventLink   String?
+  host        User     @relation("EventHost", fields: [hostId], references: [id])
+  hostId      String
+  eventImage  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 enum Role {
   USER
   ADMIN
   Moderator
+}
+
+enum PostType {
+  REGULAR
+  CODE_QUERY
 }
