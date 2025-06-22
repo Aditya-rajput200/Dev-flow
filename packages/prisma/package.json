@@ -2,7 +2,7 @@
   "name": "@dev-flow/prisma",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev --skip-generate",
@@ -11,7 +11,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "ISC", 
   "devDependencies": {
     "dotenv-cli": "^8.0.0",
     "prisma": "^6.9.0"

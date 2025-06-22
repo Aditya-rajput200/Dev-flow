@@ -3,7 +3,10 @@ import { createToken } from '../middleware/authMiddleware';
 import prisma from '@dev-flow/prisma';
 import bcrypt from "bcrypt";
 import {verifyGoogleToken} from '../utils/googleVerifyToken'
+import { sendEmail } from '../utils/sendEmail';
+import { WelcomeEmailTemplate } from './../templates/welcomeEmailTemplate';
 
+ 
 // email password auth
 module.exports.EmailPassLogin= async (req: Request, res: Response) => {
 
@@ -35,7 +38,7 @@ module.exports.EmailPassLogin= async (req: Request, res: Response) => {
     })
 
     .json(token + "User loged in succesfully");
-
+   
    return token;
  } catch (error) {
     console.error('Error during authentication:', error);
@@ -53,13 +56,23 @@ module.exports.EmailPassRegister = async (req: Request, res: Response) => {
   const AllreadyExist_email = await prisma.user.findUnique({
     where: {
       email,
+    
     },
   });
+
+  const phoneExist = await prisma.user.findUnique({
+    where: { 
+      phone,
+    }
+  });
+  if (phoneExist) {
+    return res.status(400).json("Phone number already exist");
+  }
 
   if (AllreadyExist_email) {
     return res.status(400).json("Email already exist");
   }
-  try {
+  try { 
     
     // hash password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -71,7 +84,8 @@ module.exports.EmailPassRegister = async (req: Request, res: Response) => {
         name,
         phone,
       },
-    });
+    }); 
+   
     //Genrate token
     const token = createToken(NewUser.id, NewUser.role);
     // Set the token in cookies
@@ -80,10 +94,27 @@ module.exports.EmailPassRegister = async (req: Request, res: Response) => {
     .cookie("AccessToken", token, {
       maxAge: 3600000,
       httpOnly: true,
-    })
-    
+    })  
     .json({ message: 'User registered successfully', token });
-    return ;
+   
+    // Send welcome email
+     try {
+      await sendEmail({
+        from: `"DevConnect" <${process.env.SMTP_USER}>`,
+        to: email,
+        subject: 'Welcome to DevConnect',
+        text: `Hello ${name},\n\nThank you for registering on DevConnect!\n\nBest regards,\nDevConnect Team`,
+        html: WelcomeEmailTemplate(name)
+      });
+      
+    } catch (error) {
+      console.error('Error sending welcome email:', error);
+      
+      return res.status(500).json({ message: 'Failed to send welcome email' });
+        
+    } 
+   
+    return
   } catch (error) {
     console.error('Error during registration:', error);
     return res.status(500).json({ message: 'Internal server error' });

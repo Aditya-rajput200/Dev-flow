@@ -1,5 +1,3 @@
-
-
 import express from "express";
 import dotenv from "dotenv";
 import helmet from "helmet";
@@ -10,16 +8,16 @@ import { Authrouter } from "./routes/auth";
 
 // Load env variables
 dotenv.config();
-
-const PORT = process.env.PORT || 9000;
-
+const PORT = 9000;
 const app = express();
+
 
 // Middlewares
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+
 
 // Rate limiter
 const limiter = rateLimit({
