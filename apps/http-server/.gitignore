@@ -1,0 +1,7 @@
+# add the gitignore file to the root of the project
+# Ignore node_modules directory 
+/node_modules
+# Ignore build output directory
+/dist
+# Ignore environment variable files
+/.env
