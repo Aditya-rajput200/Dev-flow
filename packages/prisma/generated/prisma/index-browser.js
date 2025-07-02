@@ -130,14 +130,16 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   password: 'password',
-  avatarImg: 'avatarImg',
   role: 'role'
 };
 
 exports.Prisma.ProfileScalarFieldEnum = {
   id: 'id',
+  userName: 'userName',
   bio: 'bio',
-  avatarUrl: 'avatarUrl',
+  profilePublicId: 'profilePublicId',
+  profileFormat: 'profileFormat',
+  profileVersion: 'profileVersion',
   userId: 'userId',
   githubUrl: 'githubUrl',
   portfolioUrl: 'portfolioUrl',

@@ -24,7 +24,6 @@ model User {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   password      String
-  avatarImg     String?
   role          Role           @default(USER)
   profile       Profile?
   following     Follow[]       @relation("follower")
@@ -36,14 +35,17 @@ model User {
 }
 
 model Profile {
-  id           String   @id @default(cuid())
-  bio          String?
-  avatarUrl    String?
-  user         User     @relation(fields: [userId], references: [id])
-  userId       String   @unique
-  githubUrl    String?
-  portfolioUrl String?
-  skills       String[]
+  id              String   @id @default(cuid())
+  userName        String
+  bio             String?
+  profilePublicId String?
+  profileFormat   String?
+  profileVersion  String?
+  user            User     @relation(fields: [userId], references: [id])
+  userId          String   @unique
+  githubUrl       String?
+  portfolioUrl    String?
+  skills          String[]
 }
 
 model Follow {
