@@ -134,6 +134,76 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role'
 };
 
+exports.Prisma.ProfileScalarFieldEnum = {
+  id: 'id',
+  bio: 'bio',
+  avatarUrl: 'avatarUrl',
+  userId: 'userId',
+  githubUrl: 'githubUrl',
+  portfolioUrl: 'portfolioUrl',
+  skills: 'skills'
+};
+
+exports.Prisma.FollowScalarFieldEnum = {
+  id: 'id',
+  followerId: 'followerId',
+  followingId: 'followingId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  authorId: 'authorId',
+  createdAt: 'createdAt',
+  type: 'type',
+  imageUrl: 'imageUrl',
+  videoUrl: 'videoUrl',
+  codeQueryId: 'codeQueryId',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CodeQueryScalarFieldEnum = {
+  id: 'id',
+  relevantTech: 'relevantTech',
+  errorDetails: 'errorDetails',
+  codeSnippet: 'codeSnippet',
+  postId: 'postId'
+};
+
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  authorId: 'authorId',
+  postId: 'postId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  message: 'message',
+  read: 'read',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.EventScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  date: 'date',
+  time: 'time',
+  location: 'location',
+  eventLink: 'eventLink',
+  hostId: 'hostId',
+  eventImage: 'eventImage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -152,14 +222,32 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',
   ADMIN: 'ADMIN',
   Moderator: 'Moderator'
 };
 
+exports.PostType = exports.$Enums.PostType = {
+  REGULAR: 'REGULAR',
+  CODE_QUERY: 'CODE_QUERY'
+};
+
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Profile: 'Profile',
+  Follow: 'Follow',
+  Post: 'Post',
+  CodeQuery: 'CodeQuery',
+  Comment: 'Comment',
+  Notification: 'Notification',
+  Event: 'Event'
 };
 
 /**
