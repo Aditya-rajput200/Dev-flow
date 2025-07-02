@@ -1663,7 +1663,6 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     password: string | null
-    avatarImg: string | null
     role: $Enums.Role | null
     phone: string | null
     oauthProvider: string | null
@@ -1686,7 +1685,6 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     password: string | null
-    avatarImg: string | null
     role: $Enums.Role | null
     phone: string | null
     oauthProvider: string | null
@@ -1708,7 +1706,6 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     password: number
-    avatarImg: number
     role: number
     phone: number
     oauthProvider: number
@@ -1732,7 +1729,6 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     password?: true
-    avatarImg?: true
     role?: true
     phone?: true
     oauthProvider?: true
@@ -1754,7 +1750,6 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     password?: true
-    avatarImg?: true
     role?: true
     phone?: true
     oauthProvider?: true
@@ -1776,7 +1771,6 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     password?: true
-    avatarImg?: true
     role?: true
     phone?: true
     oauthProvider?: true
@@ -1872,7 +1866,6 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     password: string
-    avatarImg: string | null
     role: $Enums.Role
     name: string
     phone: string | null
@@ -1912,7 +1905,6 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     password?: boolean
-    avatarImg?: boolean
     role?: boolean
     profile?: boolean | User$profileArgs<ExtArgs>
     following?: boolean | User$followingArgs<ExtArgs>
@@ -1934,7 +1926,6 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     password?: boolean
-    avatarImg?: boolean
     role?: boolean
     phone?: boolean
     oauthProvider?: boolean
@@ -1956,7 +1947,6 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     password?: boolean
-    avatarImg?: boolean
     role?: boolean
     phone?: boolean
     oauthProvider?: boolean
@@ -1978,11 +1968,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     password?: boolean
-    avatarImg?: boolean
     role?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "phone" | "oauthProvider" | "oauthId" | "createdAt" | "updatedAt" | "password" | "avatarImg" | "role", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "phone" | "oauthProvider" | "oauthId" | "createdAt" | "updatedAt" | "password" | "role", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profile?: boolean | User$profileArgs<ExtArgs>
     following?: boolean | User$followingArgs<ExtArgs>
@@ -2018,7 +2007,6 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       password: string
-      avatarImg: string | null
       role: $Enums.Role
       name: string
       phone: string | null
@@ -2469,7 +2457,6 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly password: FieldRef<"User", 'String'>
-    readonly avatarImg: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
     readonly phone: FieldRef<"User", 'String'>
     readonly oauthProvider: FieldRef<"User", 'String'>
@@ -3024,8 +3011,11 @@ export namespace Prisma {
 
   export type ProfileMinAggregateOutputType = {
     id: string | null
+    userName: string | null
     bio: string | null
-    avatarUrl: string | null
+    profilePublicId: string | null
+    profileFormat: string | null
+    profileVersion: string | null
     userId: string | null
     githubUrl: string | null
     portfolioUrl: string | null
@@ -3033,8 +3023,11 @@ export namespace Prisma {
 
   export type ProfileMaxAggregateOutputType = {
     id: string | null
+    userName: string | null
     bio: string | null
-    avatarUrl: string | null
+    profilePublicId: string | null
+    profileFormat: string | null
+    profileVersion: string | null
     userId: string | null
     githubUrl: string | null
     portfolioUrl: string | null
@@ -3042,8 +3035,11 @@ export namespace Prisma {
 
   export type ProfileCountAggregateOutputType = {
     id: number
+    userName: number
     bio: number
-    avatarUrl: number
+    profilePublicId: number
+    profileFormat: number
+    profileVersion: number
     userId: number
     githubUrl: number
     portfolioUrl: number
@@ -3054,8 +3050,11 @@ export namespace Prisma {
 
   export type ProfileMinAggregateInputType = {
     id?: true
+    userName?: true
     bio?: true
-    avatarUrl?: true
+    profilePublicId?: true
+    profileFormat?: true
+    profileVersion?: true
     userId?: true
     githubUrl?: true
     portfolioUrl?: true
@@ -3063,8 +3062,11 @@ export namespace Prisma {
 
   export type ProfileMaxAggregateInputType = {
     id?: true
+    userName?: true
     bio?: true
-    avatarUrl?: true
+    profilePublicId?: true
+    profileFormat?: true
+    profileVersion?: true
     userId?: true
     githubUrl?: true
     portfolioUrl?: true
@@ -3072,8 +3074,11 @@ export namespace Prisma {
 
   export type ProfileCountAggregateInputType = {
     id?: true
+    userName?: true
     bio?: true
-    avatarUrl?: true
+    profilePublicId?: true
+    profileFormat?: true
+    profileVersion?: true
     userId?: true
     githubUrl?: true
     portfolioUrl?: true
@@ -3155,8 +3160,11 @@ export namespace Prisma {
 
   export type ProfileGroupByOutputType = {
     id: string
+    userName: string
     bio: string | null
-    avatarUrl: string | null
+    profilePublicId: string | null
+    profileFormat: string | null
+    profileVersion: string | null
     userId: string
     githubUrl: string | null
     portfolioUrl: string | null
@@ -3182,8 +3190,11 @@ export namespace Prisma {
 
   export type ProfileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    userName?: boolean
     bio?: boolean
-    avatarUrl?: boolean
+    profilePublicId?: boolean
+    profileFormat?: boolean
+    profileVersion?: boolean
     userId?: boolean
     githubUrl?: boolean
     portfolioUrl?: boolean
@@ -3193,8 +3204,11 @@ export namespace Prisma {
 
   export type ProfileSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    userName?: boolean
     bio?: boolean
-    avatarUrl?: boolean
+    profilePublicId?: boolean
+    profileFormat?: boolean
+    profileVersion?: boolean
     userId?: boolean
     githubUrl?: boolean
     portfolioUrl?: boolean
@@ -3204,8 +3218,11 @@ export namespace Prisma {
 
   export type ProfileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    userName?: boolean
     bio?: boolean
-    avatarUrl?: boolean
+    profilePublicId?: boolean
+    profileFormat?: boolean
+    profileVersion?: boolean
     userId?: boolean
     githubUrl?: boolean
     portfolioUrl?: boolean
@@ -3215,15 +3232,18 @@ export namespace Prisma {
 
   export type ProfileSelectScalar = {
     id?: boolean
+    userName?: boolean
     bio?: boolean
-    avatarUrl?: boolean
+    profilePublicId?: boolean
+    profileFormat?: boolean
+    profileVersion?: boolean
     userId?: boolean
     githubUrl?: boolean
     portfolioUrl?: boolean
     skills?: boolean
   }
 
-  export type ProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bio" | "avatarUrl" | "userId" | "githubUrl" | "portfolioUrl" | "skills", ExtArgs["result"]["profile"]>
+  export type ProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userName" | "bio" | "profilePublicId" | "profileFormat" | "profileVersion" | "userId" | "githubUrl" | "portfolioUrl" | "skills", ExtArgs["result"]["profile"]>
   export type ProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3241,8 +3261,11 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      userName: string
       bio: string | null
-      avatarUrl: string | null
+      profilePublicId: string | null
+      profileFormat: string | null
+      profileVersion: string | null
       userId: string
       githubUrl: string | null
       portfolioUrl: string | null
@@ -3672,8 +3695,11 @@ export namespace Prisma {
    */
   interface ProfileFieldRefs {
     readonly id: FieldRef<"Profile", 'String'>
+    readonly userName: FieldRef<"Profile", 'String'>
     readonly bio: FieldRef<"Profile", 'String'>
-    readonly avatarUrl: FieldRef<"Profile", 'String'>
+    readonly profilePublicId: FieldRef<"Profile", 'String'>
+    readonly profileFormat: FieldRef<"Profile", 'String'>
+    readonly profileVersion: FieldRef<"Profile", 'String'>
     readonly userId: FieldRef<"Profile", 'String'>
     readonly githubUrl: FieldRef<"Profile", 'String'>
     readonly portfolioUrl: FieldRef<"Profile", 'String'>
@@ -10734,7 +10760,6 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     password: 'password',
-    avatarImg: 'avatarImg',
     role: 'role'
     name: 'name',
     phone: 'phone',
@@ -10752,8 +10777,11 @@ export namespace Prisma {
 
   export const ProfileScalarFieldEnum: {
     id: 'id',
+    userName: 'userName',
     bio: 'bio',
-    avatarUrl: 'avatarUrl',
+    profilePublicId: 'profilePublicId',
+    profileFormat: 'profileFormat',
+    profileVersion: 'profileVersion',
     userId: 'userId',
     githubUrl: 'githubUrl',
     portfolioUrl: 'portfolioUrl',
@@ -11015,7 +11043,6 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     password?: StringFilter<"User"> | string
-    avatarImg?: StringNullableFilter<"User"> | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
     following?: FollowListRelationFilter
@@ -11036,7 +11063,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     password?: SortOrder
-    avatarImg?: SortOrderInput | SortOrder
     role?: SortOrder
     profile?: ProfileOrderByWithRelationInput
     following?: FollowOrderByRelationAggregateInput
@@ -11062,7 +11088,6 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     password?: StringFilter<"User"> | string
-    avatarImg?: StringNullableFilter<"User"> | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
     following?: FollowListRelationFilter
@@ -11083,7 +11108,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     password?: SortOrder
-    avatarImg?: SortOrderInput | SortOrder
     role?: SortOrder
     name?: SortOrder
     phone?: SortOrderInput | SortOrder
@@ -11113,7 +11137,6 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     password?: StringWithAggregatesFilter<"User"> | string
-    avatarImg?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   }
 
@@ -11122,8 +11145,11 @@ export namespace Prisma {
     OR?: ProfileWhereInput[]
     NOT?: ProfileWhereInput | ProfileWhereInput[]
     id?: StringFilter<"Profile"> | string
+    userName?: StringFilter<"Profile"> | string
     bio?: StringNullableFilter<"Profile"> | string | null
-    avatarUrl?: StringNullableFilter<"Profile"> | string | null
+    profilePublicId?: StringNullableFilter<"Profile"> | string | null
+    profileFormat?: StringNullableFilter<"Profile"> | string | null
+    profileVersion?: StringNullableFilter<"Profile"> | string | null
     userId?: StringFilter<"Profile"> | string
     githubUrl?: StringNullableFilter<"Profile"> | string | null
     portfolioUrl?: StringNullableFilter<"Profile"> | string | null
@@ -11133,8 +11159,11 @@ export namespace Prisma {
 
   export type ProfileOrderByWithRelationInput = {
     id?: SortOrder
+    userName?: SortOrder
     bio?: SortOrderInput | SortOrder
-    avatarUrl?: SortOrderInput | SortOrder
+    profilePublicId?: SortOrderInput | SortOrder
+    profileFormat?: SortOrderInput | SortOrder
+    profileVersion?: SortOrderInput | SortOrder
     userId?: SortOrder
     githubUrl?: SortOrderInput | SortOrder
     portfolioUrl?: SortOrderInput | SortOrder
@@ -11148,8 +11177,11 @@ export namespace Prisma {
     AND?: ProfileWhereInput | ProfileWhereInput[]
     OR?: ProfileWhereInput[]
     NOT?: ProfileWhereInput | ProfileWhereInput[]
+    userName?: StringFilter<"Profile"> | string
     bio?: StringNullableFilter<"Profile"> | string | null
-    avatarUrl?: StringNullableFilter<"Profile"> | string | null
+    profilePublicId?: StringNullableFilter<"Profile"> | string | null
+    profileFormat?: StringNullableFilter<"Profile"> | string | null
+    profileVersion?: StringNullableFilter<"Profile"> | string | null
     githubUrl?: StringNullableFilter<"Profile"> | string | null
     portfolioUrl?: StringNullableFilter<"Profile"> | string | null
     skills?: StringNullableListFilter<"Profile">
@@ -11158,8 +11190,11 @@ export namespace Prisma {
 
   export type ProfileOrderByWithAggregationInput = {
     id?: SortOrder
+    userName?: SortOrder
     bio?: SortOrderInput | SortOrder
-    avatarUrl?: SortOrderInput | SortOrder
+    profilePublicId?: SortOrderInput | SortOrder
+    profileFormat?: SortOrderInput | SortOrder
+    profileVersion?: SortOrderInput | SortOrder
     userId?: SortOrder
     githubUrl?: SortOrderInput | SortOrder
     portfolioUrl?: SortOrderInput | SortOrder
@@ -11174,8 +11209,11 @@ export namespace Prisma {
     OR?: ProfileScalarWhereWithAggregatesInput[]
     NOT?: ProfileScalarWhereWithAggregatesInput | ProfileScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Profile"> | string
+    userName?: StringWithAggregatesFilter<"Profile"> | string
     bio?: StringNullableWithAggregatesFilter<"Profile"> | string | null
-    avatarUrl?: StringNullableWithAggregatesFilter<"Profile"> | string | null
+    profilePublicId?: StringNullableWithAggregatesFilter<"Profile"> | string | null
+    profileFormat?: StringNullableWithAggregatesFilter<"Profile"> | string | null
+    profileVersion?: StringNullableWithAggregatesFilter<"Profile"> | string | null
     userId?: StringWithAggregatesFilter<"Profile"> | string
     githubUrl?: StringNullableWithAggregatesFilter<"Profile"> | string | null
     portfolioUrl?: StringNullableWithAggregatesFilter<"Profile"> | string | null
@@ -11597,7 +11635,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileCreateNestedOneWithoutUserInput
     following?: FollowCreateNestedManyWithoutFollowerInput
@@ -11619,7 +11656,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
@@ -11641,7 +11677,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUpdateOneWithoutUserNestedInput
     following?: FollowUpdateManyWithoutFollowerNestedInput
@@ -11663,7 +11698,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
@@ -11685,7 +11719,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     name: string
     phone?: string | null
@@ -11709,7 +11742,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11733,14 +11765,16 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type ProfileCreateInput = {
     id?: string
+    userName: string
     bio?: string | null
-    avatarUrl?: string | null
+    profilePublicId?: string | null
+    profileFormat?: string | null
+    profileVersion?: string | null
     githubUrl?: string | null
     portfolioUrl?: string | null
     skills?: ProfileCreateskillsInput | string[]
@@ -11749,8 +11783,11 @@ export namespace Prisma {
 
   export type ProfileUncheckedCreateInput = {
     id?: string
+    userName: string
     bio?: string | null
-    avatarUrl?: string | null
+    profilePublicId?: string | null
+    profileFormat?: string | null
+    profileVersion?: string | null
     userId: string
     githubUrl?: string | null
     portfolioUrl?: string | null
@@ -11759,8 +11796,11 @@ export namespace Prisma {
 
   export type ProfileUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePublicId?: NullableStringFieldUpdateOperationsInput | string | null
+    profileFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    profileVersion?: NullableStringFieldUpdateOperationsInput | string | null
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: ProfileUpdateskillsInput | string[]
@@ -11769,8 +11809,11 @@ export namespace Prisma {
 
   export type ProfileUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePublicId?: NullableStringFieldUpdateOperationsInput | string | null
+    profileFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    profileVersion?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11779,8 +11822,11 @@ export namespace Prisma {
 
   export type ProfileCreateManyInput = {
     id?: string
+    userName: string
     bio?: string | null
-    avatarUrl?: string | null
+    profilePublicId?: string | null
+    profileFormat?: string | null
+    profileVersion?: string | null
     userId: string
     githubUrl?: string | null
     portfolioUrl?: string | null
@@ -11789,8 +11835,11 @@ export namespace Prisma {
 
   export type ProfileUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePublicId?: NullableStringFieldUpdateOperationsInput | string | null
+    profileFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    profileVersion?: NullableStringFieldUpdateOperationsInput | string | null
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: ProfileUpdateskillsInput | string[]
@@ -11798,8 +11847,11 @@ export namespace Prisma {
 
   export type ProfileUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePublicId?: NullableStringFieldUpdateOperationsInput | string | null
+    profileFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    profileVersion?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12341,7 +12393,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     password?: SortOrder
-    avatarImg?: SortOrder
     role?: SortOrder
     phone?: SortOrder
     oauthProvider?: SortOrder
@@ -12363,7 +12414,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     password?: SortOrder
-    avatarImg?: SortOrder
     role?: SortOrder
     phone?: SortOrder
     oauthProvider?: SortOrder
@@ -12385,7 +12435,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     password?: SortOrder
-    avatarImg?: SortOrder
     role?: SortOrder
     phone?: SortOrder
     oauthProvider?: SortOrder
@@ -12472,8 +12521,11 @@ export namespace Prisma {
 
   export type ProfileCountOrderByAggregateInput = {
     id?: SortOrder
+    userName?: SortOrder
     bio?: SortOrder
-    avatarUrl?: SortOrder
+    profilePublicId?: SortOrder
+    profileFormat?: SortOrder
+    profileVersion?: SortOrder
     userId?: SortOrder
     githubUrl?: SortOrder
     portfolioUrl?: SortOrder
@@ -12482,8 +12534,11 @@ export namespace Prisma {
 
   export type ProfileMaxOrderByAggregateInput = {
     id?: SortOrder
+    userName?: SortOrder
     bio?: SortOrder
-    avatarUrl?: SortOrder
+    profilePublicId?: SortOrder
+    profileFormat?: SortOrder
+    profileVersion?: SortOrder
     userId?: SortOrder
     githubUrl?: SortOrder
     portfolioUrl?: SortOrder
@@ -12491,8 +12546,11 @@ export namespace Prisma {
 
   export type ProfileMinOrderByAggregateInput = {
     id?: SortOrder
+    userName?: SortOrder
     bio?: SortOrder
-    avatarUrl?: SortOrder
+    profilePublicId?: SortOrder
+    profileFormat?: SortOrder
+    profileVersion?: SortOrder
     userId?: SortOrder
     githubUrl?: SortOrder
     portfolioUrl?: SortOrder
@@ -13574,8 +13632,11 @@ export namespace Prisma {
 
   export type ProfileCreateWithoutUserInput = {
     id?: string
+    userName: string
     bio?: string | null
-    avatarUrl?: string | null
+    profilePublicId?: string | null
+    profileFormat?: string | null
+    profileVersion?: string | null
     githubUrl?: string | null
     portfolioUrl?: string | null
     skills?: ProfileCreateskillsInput | string[]
@@ -13583,8 +13644,11 @@ export namespace Prisma {
 
   export type ProfileUncheckedCreateWithoutUserInput = {
     id?: string
+    userName: string
     bio?: string | null
-    avatarUrl?: string | null
+    profilePublicId?: string | null
+    profileFormat?: string | null
+    profileVersion?: string | null
     githubUrl?: string | null
     portfolioUrl?: string | null
     skills?: ProfileCreateskillsInput | string[]
@@ -13778,8 +13842,11 @@ export namespace Prisma {
 
   export type ProfileUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePublicId?: NullableStringFieldUpdateOperationsInput | string | null
+    profileFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    profileVersion?: NullableStringFieldUpdateOperationsInput | string | null
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: ProfileUpdateskillsInput | string[]
@@ -13787,8 +13854,11 @@ export namespace Prisma {
 
   export type ProfileUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePublicId?: NullableStringFieldUpdateOperationsInput | string | null
+    profileFormat?: NullableStringFieldUpdateOperationsInput | string | null
+    profileVersion?: NullableStringFieldUpdateOperationsInput | string | null
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: ProfileUpdateskillsInput | string[]
@@ -13967,7 +14037,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     following?: FollowCreateNestedManyWithoutFollowerInput
     followers?: FollowCreateNestedManyWithoutFollowingInput
@@ -13987,7 +14056,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
     followers?: FollowUncheckedCreateNestedManyWithoutFollowingInput
@@ -14023,7 +14091,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     following?: FollowUpdateManyWithoutFollowerNestedInput
     followers?: FollowUpdateManyWithoutFollowingNestedInput
@@ -14043,7 +14110,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
     followers?: FollowUncheckedUpdateManyWithoutFollowingNestedInput
@@ -14063,7 +14129,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileCreateNestedOneWithoutUserInput
     followers?: FollowCreateNestedManyWithoutFollowingInput
@@ -14083,7 +14148,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     followers?: FollowUncheckedCreateNestedManyWithoutFollowingInput
@@ -14108,7 +14172,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileCreateNestedOneWithoutUserInput
     following?: FollowCreateNestedManyWithoutFollowerInput
@@ -14128,7 +14191,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
@@ -14164,7 +14226,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUpdateOneWithoutUserNestedInput
     followers?: FollowUpdateManyWithoutFollowingNestedInput
@@ -14184,7 +14245,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     followers?: FollowUncheckedUpdateManyWithoutFollowingNestedInput
@@ -14215,7 +14275,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUpdateOneWithoutUserNestedInput
     following?: FollowUpdateManyWithoutFollowerNestedInput
@@ -14235,7 +14294,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
@@ -14255,7 +14313,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileCreateNestedOneWithoutUserInput
     following?: FollowCreateNestedManyWithoutFollowerInput
@@ -14275,7 +14332,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
@@ -14355,7 +14411,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUpdateOneWithoutUserNestedInput
     following?: FollowUpdateManyWithoutFollowerNestedInput
@@ -14375,7 +14430,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
@@ -14507,7 +14561,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileCreateNestedOneWithoutUserInput
     following?: FollowCreateNestedManyWithoutFollowerInput
@@ -14527,7 +14580,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
@@ -14596,7 +14648,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUpdateOneWithoutUserNestedInput
     following?: FollowUpdateManyWithoutFollowerNestedInput
@@ -14616,7 +14667,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
@@ -14675,7 +14725,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileCreateNestedOneWithoutUserInput
     following?: FollowCreateNestedManyWithoutFollowerInput
@@ -14695,7 +14744,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
@@ -14731,7 +14779,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUpdateOneWithoutUserNestedInput
     following?: FollowUpdateManyWithoutFollowerNestedInput
@@ -14751,7 +14798,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
@@ -14771,7 +14817,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileCreateNestedOneWithoutUserInput
     following?: FollowCreateNestedManyWithoutFollowerInput
@@ -14791,7 +14836,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     password: string
-    avatarImg?: string | null
     role?: $Enums.Role
     profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
@@ -14827,7 +14871,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUpdateOneWithoutUserNestedInput
     following?: FollowUpdateManyWithoutFollowerNestedInput
@@ -14847,7 +14890,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput

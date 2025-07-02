@@ -130,8 +130,80 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   password: 'password',
-  avatarImg: 'avatarImg',
   role: 'role'
+};
+
+exports.Prisma.ProfileScalarFieldEnum = {
+  id: 'id',
+  userName: 'userName',
+  bio: 'bio',
+  profilePublicId: 'profilePublicId',
+  profileFormat: 'profileFormat',
+  profileVersion: 'profileVersion',
+  userId: 'userId',
+  githubUrl: 'githubUrl',
+  portfolioUrl: 'portfolioUrl',
+  skills: 'skills'
+};
+
+exports.Prisma.FollowScalarFieldEnum = {
+  id: 'id',
+  followerId: 'followerId',
+  followingId: 'followingId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  authorId: 'authorId',
+  createdAt: 'createdAt',
+  type: 'type',
+  imageUrl: 'imageUrl',
+  videoUrl: 'videoUrl',
+  codeQueryId: 'codeQueryId',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CodeQueryScalarFieldEnum = {
+  id: 'id',
+  relevantTech: 'relevantTech',
+  errorDetails: 'errorDetails',
+  codeSnippet: 'codeSnippet',
+  postId: 'postId'
+};
+
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  authorId: 'authorId',
+  postId: 'postId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  message: 'message',
+  read: 'read',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.EventScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  date: 'date',
+  time: 'time',
+  location: 'location',
+  eventLink: 'eventLink',
+  hostId: 'hostId',
+  eventImage: 'eventImage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {

@@ -5,6 +5,8 @@ import cors from "cors";
 import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
 import { Authrouter } from "./routes/auth";
+import { Userrouter } from "./routes/user";
+import PostRouter from "./routes/post";
 
 // Load env variables
 dotenv.config();
@@ -30,6 +32,8 @@ app.use(limiter);
 
 // Routes
 app.use("/api/auth", Authrouter);
+app.use("/api/user", Userrouter);
+app.use("/api/post", PostRouter )
 
 // Server start
 app.listen(PORT, () => {
