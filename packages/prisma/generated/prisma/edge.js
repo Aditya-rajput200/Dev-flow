@@ -196,32 +196,14 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
-exports.Prisma.JsonNullValueFilter = {
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
-};
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',
   ADMIN: 'ADMIN',
   Moderator: 'Moderator'
 };
 
-exports.PostType = exports.$Enums.PostType = {
-  REGULAR: 'REGULAR',
-  CODE_QUERY: 'CODE_QUERY'
-};
-
 exports.Prisma.ModelName = {
-  User: 'User',
-  Profile: 'Profile',
-  Follow: 'Follow',
-  Post: 'Post',
-  CodeQuery: 'CodeQuery',
-  Comment: 'Comment',
-  Notification: 'Notification',
-  Event: 'Event'
+  User: 'User'
 };
 /**
  * Create the Client

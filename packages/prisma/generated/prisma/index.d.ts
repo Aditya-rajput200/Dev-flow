@@ -1654,18 +1654,6 @@ export namespace Prisma {
 
   export type UserMinAggregateOutputType = {
     id: string | null
-    email: string | null
-    name: string | null
-    phone: string | null
-    oauthProvider: string | null
-    oauthId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    password: string | null
-    role: $Enums.Role | null
-  }
-
-  export type UserMaxAggregateOutputType = {
     id: string | null
     email: string | null
     name: string | null
@@ -1675,6 +1663,36 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     password: string | null
+    role: $Enums.Role | null
+    phone: string | null
+    oauthProvider: string | null
+    oauthId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    password: string | null
+    avatarImg: string | null
+    role: $Enums.Role | null
+  }
+
+  export type UserMaxAggregateOutputType = {
+    id: string | null
+    id: string | null
+    email: string | null
+    name: string | null
+    phone: string | null
+    oauthProvider: string | null
+    oauthId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    password: string | null
+    role: $Enums.Role | null
+    phone: string | null
+    oauthProvider: string | null
+    oauthId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    password: string | null
+    avatarImg: string | null
     role: $Enums.Role | null
   }
 
@@ -1688,6 +1706,14 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     password: number
+    role: number
+    phone: number
+    oauthProvider: number
+    oauthId: number
+    createdAt: number
+    updatedAt: number
+    password: number
+    avatarImg: number
     role: number
     _all: number
   }
@@ -1704,6 +1730,14 @@ export namespace Prisma {
     updatedAt?: true
     password?: true
     role?: true
+    phone?: true
+    oauthProvider?: true
+    oauthId?: true
+    createdAt?: true
+    updatedAt?: true
+    password?: true
+    avatarImg?: true
+    role?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1717,6 +1751,14 @@ export namespace Prisma {
     updatedAt?: true
     password?: true
     role?: true
+    phone?: true
+    oauthProvider?: true
+    oauthId?: true
+    createdAt?: true
+    updatedAt?: true
+    password?: true
+    avatarImg?: true
+    role?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1729,6 +1771,14 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     password?: true
+    role?: true
+    phone?: true
+    oauthProvider?: true
+    oauthId?: true
+    createdAt?: true
+    updatedAt?: true
+    password?: true
+    avatarImg?: true
     role?: true
     _all?: true
   }
@@ -1807,6 +1857,7 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: string
+    id: string
     email: string
     name: string
     phone: string | null
@@ -1815,6 +1866,15 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     password: string
+    role: $Enums.Role
+    name: string
+    phone: string | null
+    oauthProvider: string | null
+    oauthId: string | null
+    createdAt: Date
+    updatedAt: Date
+    password: string
+    avatarImg: string | null
     role: $Enums.Role
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -1867,6 +1927,14 @@ export namespace Prisma {
     updatedAt?: boolean
     password?: boolean
     role?: boolean
+    phone?: boolean
+    oauthProvider?: boolean
+    oauthId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    password?: boolean
+    avatarImg?: boolean
+    role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1879,6 +1947,14 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     password?: boolean
+    role?: boolean
+    phone?: boolean
+    oauthProvider?: boolean
+    oauthId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    password?: boolean
+    avatarImg?: boolean
     role?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1922,6 +1998,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      id: string
       email: string
       name: string
       phone: string | null
@@ -1930,6 +2007,15 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       password: string
+      role: $Enums.Role
+      name: string
+      phone: string | null
+      oauthProvider: string | null
+      oauthId: string | null
+      createdAt: Date
+      updatedAt: Date
+      password: string
+      avatarImg: string | null
       role: $Enums.Role
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -2362,6 +2448,7 @@ export namespace Prisma {
    */
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
+    readonly id: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly phone: FieldRef<"User", 'String'>
@@ -2370,6 +2457,14 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly password: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'Role'>
+    readonly phone: FieldRef<"User", 'String'>
+    readonly oauthProvider: FieldRef<"User", 'String'>
+    readonly oauthId: FieldRef<"User", 'String'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly password: FieldRef<"User", 'String'>
+    readonly avatarImg: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
   }
     
@@ -2387,10 +2482,6 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -2410,10 +2501,6 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -2431,10 +2518,6 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -2484,10 +2567,6 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
      * Filter, which User to fetch.
      */
     where?: UserWhereInput
@@ -2536,10 +2615,6 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
      * Filter, which Users to fetch.
      */
     where?: UserWhereInput
@@ -2582,10 +2657,6 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to create a User.
      */
@@ -2634,10 +2705,6 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to update a User.
      */
@@ -2705,10 +2772,6 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput
@@ -2734,10 +2797,6 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
     /**
      * Filter which User to delete.
      */
@@ -10702,6 +10761,15 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     password: 'password',
     role: 'role'
+    name: 'name',
+    phone: 'phone',
+    oauthProvider: 'oauthProvider',
+    oauthId: 'oauthId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    password: 'password',
+    avatarImg: 'avatarImg',
+    role: 'role'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -10938,16 +11006,23 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
+   * Reference to a field of type 'Role[]'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+  export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
     
 
 
   /**
-   * Reference to a field of type 'Float[]'
+   * Reference to a field of type 'Int'
    */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
   /**
    * Deep Input Types
@@ -10958,6 +11033,7 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
+    id?: StringFilter<"User"> | string
     id?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
@@ -10999,7 +11075,9 @@ export namespace Prisma {
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    id?: string
     email?: string
+    phone?: string
     phone?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -11031,6 +11109,15 @@ export namespace Prisma {
     updatedAt?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    name?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    oauthProvider?: SortOrderInput | SortOrder
+    oauthId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    password?: SortOrder
+    avatarImg?: SortOrderInput | SortOrder
+    role?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -11040,6 +11127,7 @@ export namespace Prisma {
     AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"User"> | string
     id?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     name?: StringWithAggregatesFilter<"User"> | string
@@ -11538,6 +11626,7 @@ export namespace Prisma {
 
   export type UserCreateInput = {
     id?: string
+    id?: string
     email: string
     name: string
     phone?: string | null
@@ -11557,6 +11646,7 @@ export namespace Prisma {
   }
 
   export type UserUncheckedCreateInput = {
+    id?: string
     id?: string
     email: string
     name: string
@@ -11578,6 +11668,7 @@ export namespace Prisma {
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11597,6 +11688,7 @@ export namespace Prisma {
   }
 
   export type UserUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -11618,6 +11710,7 @@ export namespace Prisma {
 
   export type UserCreateManyInput = {
     id?: string
+    id?: string
     email: string
     name: string
     phone?: string | null
@@ -11627,9 +11720,19 @@ export namespace Prisma {
     updatedAt?: Date | string
     password: string
     role?: $Enums.Role
+    name: string
+    phone?: string | null
+    oauthProvider?: string | null
+    oauthId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    password: string
+    avatarImg?: string | null
+    role?: $Enums.Role
   }
 
   export type UserUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -11640,9 +11743,19 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    oauthProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    oauthId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    avatarImg?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type UserUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -12281,6 +12394,14 @@ export namespace Prisma {
     updatedAt?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    phone?: SortOrder
+    oauthProvider?: SortOrder
+    oauthId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    password?: SortOrder
+    avatarImg?: SortOrder
+    role?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -12294,6 +12415,14 @@ export namespace Prisma {
     updatedAt?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    phone?: SortOrder
+    oauthProvider?: SortOrder
+    oauthId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    password?: SortOrder
+    avatarImg?: SortOrder
+    role?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -12306,6 +12435,14 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     password?: SortOrder
+    role?: SortOrder
+    phone?: SortOrder
+    oauthProvider?: SortOrder
+    oauthId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    password?: SortOrder
+    avatarImg?: SortOrder
     role?: SortOrder
   }
 
@@ -12674,9 +12811,11 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
@@ -13297,8 +13436,22 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedEnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   export type NestedEnumRoleFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
@@ -13321,6 +13474,17 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
