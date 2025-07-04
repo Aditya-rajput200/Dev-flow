@@ -130,14 +130,16 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   password: 'password',
-  avatarImg: 'avatarImg',
   role: 'role'
 };
 
 exports.Prisma.ProfileScalarFieldEnum = {
   id: 'id',
+  userName: 'userName',
   bio: 'bio',
-  avatarUrl: 'avatarUrl',
+  profilePublicId: 'profilePublicId',
+  profileFormat: 'profileFormat',
+  profileVersion: 'profileVersion',
   userId: 'userId',
   githubUrl: 'githubUrl',
   portfolioUrl: 'portfolioUrl',
@@ -161,7 +163,9 @@ exports.Prisma.PostScalarFieldEnum = {
   imageUrl: 'imageUrl',
   videoUrl: 'videoUrl',
   codeQueryId: 'codeQueryId',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  tags: 'tags',
+  Claps: 'Claps'
 };
 
 exports.Prisma.CodeQueryScalarFieldEnum = {
@@ -177,6 +181,7 @@ exports.Prisma.CommentScalarFieldEnum = {
   content: 'content',
   authorId: 'authorId',
   postId: 'postId',
+  blogId: 'blogId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -202,6 +207,19 @@ exports.Prisma.EventScalarFieldEnum = {
   eventImage: 'eventImage',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BlogScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  authorId: 'authorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  tags: 'tags',
+  Claps: 'Claps',
+  imageUrl: 'imageUrl',
+  videoUrl: 'videoUrl'
 };
 
 exports.Prisma.SortOrder = {
@@ -247,7 +265,8 @@ exports.Prisma.ModelName = {
   CodeQuery: 'CodeQuery',
   Comment: 'Comment',
   Notification: 'Notification',
-  Event: 'Event'
+  Event: 'Event',
+  Blog: 'Blog'
 };
 
 /**

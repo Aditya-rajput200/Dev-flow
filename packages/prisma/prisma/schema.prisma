@@ -23,8 +23,7 @@ model User{
   oauthId      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  password  String
-  avatarImg String?
+  password  String 
   role     Role      @default(USER)
   profile  Profile?
   following    Follow[]   @relation("follower")
@@ -33,13 +32,17 @@ model User{
   comments      Comment[]
   notifications  Notification[]
   eventsHosted   Event[] @relation("EventHost")
-  
+  blogs Blog[] @relation("BlogAuthor")
+
 } 
 
 model Profile {
   id   String    @id @default(cuid())
+  userName  String
   bio  String?
-  avatarUrl String?
+  profilePublicId  String?
+  profileFormat    String?
+  profileVersion   String?
   user     User    @relation(fields: [userId], references: [id])
   userId   String   @unique
   githubUrl  String?
@@ -92,8 +95,10 @@ model Comment {
   content  String
   author   User   @relation(fields: [authorId], references: [id])
   authorId String
-  post    Post  @relation(fields: [postId], references: [id])
-  postId   String
+  post    Post?  @relation(fields: [postId], references: [id])
+  postId   String?
+  blog Blog? @relation(fields: [blogId], references: [id])
+  blogId String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
@@ -125,6 +130,20 @@ model Event {
   updatedAt DateTime @updatedAt
 }
 
+model Blog {
+  id String @id @default(cuid())
+  title String
+  content String
+  author User @relation("BlogAuthor", fields: [authorId], references: [id]) 
+  authorId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tags String[] 
+  comments  Comment[]
+  Claps     Int      @default(0)
+  imageUrl String?
+  videoUrl String?
+}
 
 
 
