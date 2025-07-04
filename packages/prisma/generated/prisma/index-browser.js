@@ -163,7 +163,9 @@ exports.Prisma.PostScalarFieldEnum = {
   imageUrl: 'imageUrl',
   videoUrl: 'videoUrl',
   codeQueryId: 'codeQueryId',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  tags: 'tags',
+  Claps: 'Claps'
 };
 
 exports.Prisma.CodeQueryScalarFieldEnum = {
@@ -179,6 +181,7 @@ exports.Prisma.CommentScalarFieldEnum = {
   content: 'content',
   authorId: 'authorId',
   postId: 'postId',
+  blogId: 'blogId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -206,6 +209,19 @@ exports.Prisma.EventScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BlogScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  authorId: 'authorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  tags: 'tags',
+  Claps: 'Claps',
+  imageUrl: 'imageUrl',
+  videoUrl: 'videoUrl'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -224,14 +240,33 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',
   ADMIN: 'ADMIN',
   Moderator: 'Moderator'
 };
 
+exports.PostType = exports.$Enums.PostType = {
+  REGULAR: 'REGULAR',
+  CODE_QUERY: 'CODE_QUERY'
+};
+
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Profile: 'Profile',
+  Follow: 'Follow',
+  Post: 'Post',
+  CodeQuery: 'CodeQuery',
+  Comment: 'Comment',
+  Notification: 'Notification',
+  Event: 'Event',
+  Blog: 'Blog'
 };
 
 /**

@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { Authrouter } from "./routes/auth";
 import { Userrouter } from "./routes/user";
 import PostRouter from "./routes/post";
+import BlogRouter from "./routes/blog";
 
 // Load env variables
 dotenv.config();
@@ -33,7 +34,8 @@ app.use(limiter);
 // Routes
 app.use("/api/auth", Authrouter);
 app.use("/api/user", Userrouter);
-app.use("/api/post", PostRouter )
+app.use("/api/post", PostRouter);
+app.use("/api/blog", BlogRouter);
 
 // Server start
 app.listen(PORT, () => {
