@@ -15,25 +15,25 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(cuid())
-  email         String         @unique
-  name          String
-  phone         String?        @unique
-  oauthProvider String?
-  oauthId       String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  password      String
-  role          Role           @default(USER)
-  profile       Profile?
-  following     Follow[]       @relation("follower")
-  followers     Follow[]       @relation("following")
-  posts         Post[]
-  comments      Comment[]
-  notifications Notification[]
-  eventsHosted  Event[]        @relation("EventHost")
-  blogs         Blog[]         @relation("BlogAuthor")
-  attendedEvents Attendee[]
+  id             String         @id @default(cuid())
+  email          String         @unique
+  name           String
+  phone          String?        @unique
+  oauthProvider  String?
+  oauthId        String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  password       String
+  role           Role           @default(USER)
+  profile        Profile?
+  following      Follow[]       @relation("follower")
+  followers      Follow[]       @relation("following")
+  posts          Post[]
+  comments       Comment[]
+  notifications  Notification[]
+  eventsHosted   Event[]        @relation("EventHost")
+  eventsAttended Attendee[]
+  blogs          Blog[]         @relation("BlogAuthor")
 }
 
 model Profile {
@@ -48,6 +48,7 @@ model Profile {
   githubUrl       String?
   portfolioUrl    String?
   skills          String[]
+  profileImageUrl String?  @default("https://wallpapers-clan.com/wp-content/uploads/2022/08/default-pfp-25.jpg") // Default profile image URL
 }
 
 model Follow {
@@ -110,28 +111,27 @@ model Notification {
 }
 
 model Event {
-  id          String   @id @default(cuid())
+  id          String      @id @default(cuid())
   title       String
   description String
   date        DateTime
   time        DateTime
   location    String
   eventLink   String?
-  host        User     @relation("EventHost", fields: [hostId], references: [id])
+  host        User        @relation("EventHost", fields: [hostId], references: [id])
   hostId      String
-  attendees   Attendee[]
-  status       EventStatus   @default(UPCOMING) 
+  attendees   Attendee[]  @relation("EventAttendees") // Add relation name
+  status      EventStatus @default(UPCOMING) // Change to enum type
   eventImage  String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 }
-
 
 model Attendee {
   id        String   @id @default(cuid())
-  user      User     @relation(fields: [ userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
   userId    String
-  event     Event    @relation(fields: [eventId], references: [id])
+  event     Event    @relation("EventAttendees", fields: [eventId], references: [id])
   eventId   String
   createdAt DateTime @default(now())
 
