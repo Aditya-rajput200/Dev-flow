@@ -54,6 +54,11 @@ export type Notification = $Result.DefaultSelection<Prisma.$NotificationPayload>
  */
 export type Event = $Result.DefaultSelection<Prisma.$EventPayload>
 /**
+ * Model Attendee
+ * 
+ */
+export type Attendee = $Result.DefaultSelection<Prisma.$AttendeePayload>
+/**
  * Model Blog
  * 
  */
@@ -79,6 +84,16 @@ export const PostType: {
 
 export type PostType = (typeof PostType)[keyof typeof PostType]
 
+
+export const EventStatus: {
+  UPCOMING: 'UPCOMING',
+  ONGOING: 'ONGOING',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type EventStatus = (typeof EventStatus)[keyof typeof EventStatus]
+
 }
 
 export type Role = $Enums.Role
@@ -88,6 +103,10 @@ export const Role: typeof $Enums.Role
 export type PostType = $Enums.PostType
 
 export const PostType: typeof $Enums.PostType
+
+export type EventStatus = $Enums.EventStatus
+
+export const EventStatus: typeof $Enums.EventStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -295,6 +314,16 @@ export class PrismaClient<
   get event(): Prisma.EventDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.attendee`: Exposes CRUD operations for the **Attendee** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Attendees
+    * const attendees = await prisma.attendee.findMany()
+    * ```
+    */
+  get attendee(): Prisma.AttendeeDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.blog`: Exposes CRUD operations for the **Blog** model.
     * Example usage:
     * ```ts
@@ -361,8 +390,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.9.0
-   * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
+   * Prisma Client JS version: 6.11.1
+   * Query Engine version: f40f79ec31188888a2e33acda0ecc8fd10a853a9
    */
   export type PrismaVersion = {
     client: string
@@ -751,6 +780,7 @@ export namespace Prisma {
     Comment: 'Comment',
     Notification: 'Notification',
     Event: 'Event',
+    Attendee: 'Attendee',
     Blog: 'Blog'
   };
 
@@ -770,7 +800,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "profile" | "follow" | "post" | "codeQuery" | "comment" | "notification" | "event" | "blog"
+      modelProps: "user" | "profile" | "follow" | "post" | "codeQuery" | "comment" | "notification" | "event" | "attendee" | "blog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1366,6 +1396,80 @@ export namespace Prisma {
           }
         }
       }
+      Attendee: {
+        payload: Prisma.$AttendeePayload<ExtArgs>
+        fields: Prisma.AttendeeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AttendeeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendeePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AttendeeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendeePayload>
+          }
+          findFirst: {
+            args: Prisma.AttendeeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendeePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AttendeeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendeePayload>
+          }
+          findMany: {
+            args: Prisma.AttendeeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendeePayload>[]
+          }
+          create: {
+            args: Prisma.AttendeeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendeePayload>
+          }
+          createMany: {
+            args: Prisma.AttendeeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AttendeeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendeePayload>[]
+          }
+          delete: {
+            args: Prisma.AttendeeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendeePayload>
+          }
+          update: {
+            args: Prisma.AttendeeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendeePayload>
+          }
+          deleteMany: {
+            args: Prisma.AttendeeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AttendeeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AttendeeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendeePayload>[]
+          }
+          upsert: {
+            args: Prisma.AttendeeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendeePayload>
+          }
+          aggregate: {
+            args: Prisma.AttendeeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAttendee>
+          }
+          groupBy: {
+            args: Prisma.AttendeeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AttendeeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AttendeeCountArgs<ExtArgs>
+            result: $Utils.Optional<AttendeeCountAggregateOutputType> | number
+          }
+        }
+      }
       Blog: {
         payload: Prisma.$BlogPayload<ExtArgs>
         fields: Prisma.BlogFieldRefs
@@ -1532,6 +1636,7 @@ export namespace Prisma {
     comment?: CommentOmit
     notification?: NotificationOmit
     event?: EventOmit
+    attendee?: AttendeeOmit
     blog?: BlogOmit
   }
 
@@ -1633,6 +1738,7 @@ export namespace Prisma {
     comments: number
     notifications: number
     eventsHosted: number
+    eventsAttended: number
     blogs: number
   }
 
@@ -1643,6 +1749,7 @@ export namespace Prisma {
     comments?: boolean | UserCountOutputTypeCountCommentsArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     eventsHosted?: boolean | UserCountOutputTypeCountEventsHostedArgs
+    eventsAttended?: boolean | UserCountOutputTypeCountEventsAttendedArgs
     blogs?: boolean | UserCountOutputTypeCountBlogsArgs
   }
 
@@ -1702,6 +1809,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountEventsAttendedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AttendeeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountBlogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BlogWhereInput
   }
@@ -1735,6 +1849,37 @@ export namespace Prisma {
    */
   export type PostCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommentWhereInput
+  }
+
+
+  /**
+   * Count Type EventCountOutputType
+   */
+
+  export type EventCountOutputType = {
+    attendees: number
+  }
+
+  export type EventCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    attendees?: boolean | EventCountOutputTypeCountAttendeesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCountOutputType
+     */
+    select?: EventCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountAttendeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AttendeeWhereInput
   }
 
 
@@ -1984,6 +2129,7 @@ export namespace Prisma {
     comments?: boolean | User$commentsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     eventsHosted?: boolean | User$eventsHostedArgs<ExtArgs>
+    eventsAttended?: boolean | User$eventsAttendedArgs<ExtArgs>
     blogs?: boolean | User$blogsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -2036,6 +2182,7 @@ export namespace Prisma {
     comments?: boolean | User$commentsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     eventsHosted?: boolean | User$eventsHostedArgs<ExtArgs>
+    eventsAttended?: boolean | User$eventsAttendedArgs<ExtArgs>
     blogs?: boolean | User$blogsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -2052,6 +2199,7 @@ export namespace Prisma {
       comments: Prisma.$CommentPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
       eventsHosted: Prisma.$EventPayload<ExtArgs>[]
+      eventsAttended: Prisma.$AttendeePayload<ExtArgs>[]
       blogs: Prisma.$BlogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2466,6 +2614,7 @@ export namespace Prisma {
     comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     eventsHosted<T extends User$eventsHostedArgs<ExtArgs> = {}>(args?: Subset<T, User$eventsHostedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    eventsAttended<T extends User$eventsAttendedArgs<ExtArgs> = {}>(args?: Subset<T, User$eventsAttendedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     blogs<T extends User$blogsArgs<ExtArgs> = {}>(args?: Subset<T, User$blogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3057,6 +3206,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.eventsAttended
+   */
+  export type User$eventsAttendedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeInclude<ExtArgs> | null
+    where?: AttendeeWhereInput
+    orderBy?: AttendeeOrderByWithRelationInput | AttendeeOrderByWithRelationInput[]
+    cursor?: AttendeeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AttendeeScalarFieldEnum | AttendeeScalarFieldEnum[]
+  }
+
+  /**
    * User.blogs
    */
   export type User$blogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3119,6 +3292,7 @@ export namespace Prisma {
     userId: string | null
     githubUrl: string | null
     portfolioUrl: string | null
+    profileImageUrl: string | null
   }
 
   export type ProfileMaxAggregateOutputType = {
@@ -3131,6 +3305,7 @@ export namespace Prisma {
     userId: string | null
     githubUrl: string | null
     portfolioUrl: string | null
+    profileImageUrl: string | null
   }
 
   export type ProfileCountAggregateOutputType = {
@@ -3144,6 +3319,7 @@ export namespace Prisma {
     githubUrl: number
     portfolioUrl: number
     skills: number
+    profileImageUrl: number
     _all: number
   }
 
@@ -3158,6 +3334,7 @@ export namespace Prisma {
     userId?: true
     githubUrl?: true
     portfolioUrl?: true
+    profileImageUrl?: true
   }
 
   export type ProfileMaxAggregateInputType = {
@@ -3170,6 +3347,7 @@ export namespace Prisma {
     userId?: true
     githubUrl?: true
     portfolioUrl?: true
+    profileImageUrl?: true
   }
 
   export type ProfileCountAggregateInputType = {
@@ -3183,6 +3361,7 @@ export namespace Prisma {
     githubUrl?: true
     portfolioUrl?: true
     skills?: true
+    profileImageUrl?: true
     _all?: true
   }
 
@@ -3269,6 +3448,7 @@ export namespace Prisma {
     githubUrl: string | null
     portfolioUrl: string | null
     skills: string[]
+    profileImageUrl: string | null
     _count: ProfileCountAggregateOutputType | null
     _min: ProfileMinAggregateOutputType | null
     _max: ProfileMaxAggregateOutputType | null
@@ -3299,6 +3479,7 @@ export namespace Prisma {
     githubUrl?: boolean
     portfolioUrl?: boolean
     skills?: boolean
+    profileImageUrl?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["profile"]>
 
@@ -3313,6 +3494,7 @@ export namespace Prisma {
     githubUrl?: boolean
     portfolioUrl?: boolean
     skills?: boolean
+    profileImageUrl?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["profile"]>
 
@@ -3327,6 +3509,7 @@ export namespace Prisma {
     githubUrl?: boolean
     portfolioUrl?: boolean
     skills?: boolean
+    profileImageUrl?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["profile"]>
 
@@ -3341,9 +3524,10 @@ export namespace Prisma {
     githubUrl?: boolean
     portfolioUrl?: boolean
     skills?: boolean
+    profileImageUrl?: boolean
   }
 
-  export type ProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userName" | "bio" | "profilePublicId" | "profileFormat" | "profileVersion" | "userId" | "githubUrl" | "portfolioUrl" | "skills", ExtArgs["result"]["profile"]>
+  export type ProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userName" | "bio" | "profilePublicId" | "profileFormat" | "profileVersion" | "userId" | "githubUrl" | "portfolioUrl" | "skills" | "profileImageUrl", ExtArgs["result"]["profile"]>
   export type ProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3370,6 +3554,7 @@ export namespace Prisma {
       githubUrl: string | null
       portfolioUrl: string | null
       skills: string[]
+      profileImageUrl: string | null
     }, ExtArgs["result"]["profile"]>
     composites: {}
   }
@@ -3804,6 +3989,7 @@ export namespace Prisma {
     readonly githubUrl: FieldRef<"Profile", 'String'>
     readonly portfolioUrl: FieldRef<"Profile", 'String'>
     readonly skills: FieldRef<"Profile", 'String[]'>
+    readonly profileImageUrl: FieldRef<"Profile", 'String'>
   }
     
 
@@ -9834,6 +10020,7 @@ export namespace Prisma {
     location: string | null
     eventLink: string | null
     hostId: string | null
+    status: $Enums.EventStatus | null
     eventImage: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -9848,6 +10035,7 @@ export namespace Prisma {
     location: string | null
     eventLink: string | null
     hostId: string | null
+    status: $Enums.EventStatus | null
     eventImage: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -9862,6 +10050,7 @@ export namespace Prisma {
     location: number
     eventLink: number
     hostId: number
+    status: number
     eventImage: number
     createdAt: number
     updatedAt: number
@@ -9878,6 +10067,7 @@ export namespace Prisma {
     location?: true
     eventLink?: true
     hostId?: true
+    status?: true
     eventImage?: true
     createdAt?: true
     updatedAt?: true
@@ -9892,6 +10082,7 @@ export namespace Prisma {
     location?: true
     eventLink?: true
     hostId?: true
+    status?: true
     eventImage?: true
     createdAt?: true
     updatedAt?: true
@@ -9906,6 +10097,7 @@ export namespace Prisma {
     location?: true
     eventLink?: true
     hostId?: true
+    status?: true
     eventImage?: true
     createdAt?: true
     updatedAt?: true
@@ -9993,6 +10185,7 @@ export namespace Prisma {
     location: string
     eventLink: string | null
     hostId: string
+    status: $Enums.EventStatus
     eventImage: string | null
     createdAt: Date
     updatedAt: Date
@@ -10024,10 +10217,13 @@ export namespace Prisma {
     location?: boolean
     eventLink?: boolean
     hostId?: boolean
+    status?: boolean
     eventImage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     host?: boolean | UserDefaultArgs<ExtArgs>
+    attendees?: boolean | Event$attendeesArgs<ExtArgs>
+    _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10039,6 +10235,7 @@ export namespace Prisma {
     location?: boolean
     eventLink?: boolean
     hostId?: boolean
+    status?: boolean
     eventImage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -10054,6 +10251,7 @@ export namespace Prisma {
     location?: boolean
     eventLink?: boolean
     hostId?: boolean
+    status?: boolean
     eventImage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -10069,14 +10267,17 @@ export namespace Prisma {
     location?: boolean
     eventLink?: boolean
     hostId?: boolean
+    status?: boolean
     eventImage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "date" | "time" | "location" | "eventLink" | "hostId" | "eventImage" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
+  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "date" | "time" | "location" | "eventLink" | "hostId" | "status" | "eventImage" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     host?: boolean | UserDefaultArgs<ExtArgs>
+    attendees?: boolean | Event$attendeesArgs<ExtArgs>
+    _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     host?: boolean | UserDefaultArgs<ExtArgs>
@@ -10089,6 +10290,7 @@ export namespace Prisma {
     name: "Event"
     objects: {
       host: Prisma.$UserPayload<ExtArgs>
+      attendees: Prisma.$AttendeePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10099,6 +10301,7 @@ export namespace Prisma {
       location: string
       eventLink: string | null
       hostId: string
+      status: $Enums.EventStatus
       eventImage: string | null
       createdAt: Date
       updatedAt: Date
@@ -10497,6 +10700,7 @@ export namespace Prisma {
   export interface Prisma__EventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     host<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    attendees<T extends Event$attendeesArgs<ExtArgs> = {}>(args?: Subset<T, Event$attendeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10534,6 +10738,7 @@ export namespace Prisma {
     readonly location: FieldRef<"Event", 'String'>
     readonly eventLink: FieldRef<"Event", 'String'>
     readonly hostId: FieldRef<"Event", 'String'>
+    readonly status: FieldRef<"Event", 'EventStatus'>
     readonly eventImage: FieldRef<"Event", 'String'>
     readonly createdAt: FieldRef<"Event", 'DateTime'>
     readonly updatedAt: FieldRef<"Event", 'DateTime'>
@@ -10933,6 +11138,30 @@ export namespace Prisma {
   }
 
   /**
+   * Event.attendees
+   */
+  export type Event$attendeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeInclude<ExtArgs> | null
+    where?: AttendeeWhereInput
+    orderBy?: AttendeeOrderByWithRelationInput | AttendeeOrderByWithRelationInput[]
+    cursor?: AttendeeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AttendeeScalarFieldEnum | AttendeeScalarFieldEnum[]
+  }
+
+  /**
    * Event without action
    */
   export type EventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10948,6 +11177,1059 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EventInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Attendee
+   */
+
+  export type AggregateAttendee = {
+    _count: AttendeeCountAggregateOutputType | null
+    _min: AttendeeMinAggregateOutputType | null
+    _max: AttendeeMaxAggregateOutputType | null
+  }
+
+  export type AttendeeMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    eventId: string | null
+    createdAt: Date | null
+  }
+
+  export type AttendeeMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    eventId: string | null
+    createdAt: Date | null
+  }
+
+  export type AttendeeCountAggregateOutputType = {
+    id: number
+    userId: number
+    eventId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type AttendeeMinAggregateInputType = {
+    id?: true
+    userId?: true
+    eventId?: true
+    createdAt?: true
+  }
+
+  export type AttendeeMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    eventId?: true
+    createdAt?: true
+  }
+
+  export type AttendeeCountAggregateInputType = {
+    id?: true
+    userId?: true
+    eventId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type AttendeeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Attendee to aggregate.
+     */
+    where?: AttendeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Attendees to fetch.
+     */
+    orderBy?: AttendeeOrderByWithRelationInput | AttendeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AttendeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Attendees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Attendees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Attendees
+    **/
+    _count?: true | AttendeeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AttendeeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AttendeeMaxAggregateInputType
+  }
+
+  export type GetAttendeeAggregateType<T extends AttendeeAggregateArgs> = {
+        [P in keyof T & keyof AggregateAttendee]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAttendee[P]>
+      : GetScalarType<T[P], AggregateAttendee[P]>
+  }
+
+
+
+
+  export type AttendeeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AttendeeWhereInput
+    orderBy?: AttendeeOrderByWithAggregationInput | AttendeeOrderByWithAggregationInput[]
+    by: AttendeeScalarFieldEnum[] | AttendeeScalarFieldEnum
+    having?: AttendeeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AttendeeCountAggregateInputType | true
+    _min?: AttendeeMinAggregateInputType
+    _max?: AttendeeMaxAggregateInputType
+  }
+
+  export type AttendeeGroupByOutputType = {
+    id: string
+    userId: string
+    eventId: string
+    createdAt: Date
+    _count: AttendeeCountAggregateOutputType | null
+    _min: AttendeeMinAggregateOutputType | null
+    _max: AttendeeMaxAggregateOutputType | null
+  }
+
+  type GetAttendeeGroupByPayload<T extends AttendeeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AttendeeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AttendeeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AttendeeGroupByOutputType[P]>
+            : GetScalarType<T[P], AttendeeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AttendeeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    eventId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["attendee"]>
+
+  export type AttendeeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    eventId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["attendee"]>
+
+  export type AttendeeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    eventId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["attendee"]>
+
+  export type AttendeeSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    eventId?: boolean
+    createdAt?: boolean
+  }
+
+  export type AttendeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "eventId" | "createdAt", ExtArgs["result"]["attendee"]>
+  export type AttendeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+  export type AttendeeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+  export type AttendeeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+
+  export type $AttendeePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Attendee"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      event: Prisma.$EventPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      eventId: string
+      createdAt: Date
+    }, ExtArgs["result"]["attendee"]>
+    composites: {}
+  }
+
+  type AttendeeGetPayload<S extends boolean | null | undefined | AttendeeDefaultArgs> = $Result.GetResult<Prisma.$AttendeePayload, S>
+
+  type AttendeeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AttendeeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AttendeeCountAggregateInputType | true
+    }
+
+  export interface AttendeeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Attendee'], meta: { name: 'Attendee' } }
+    /**
+     * Find zero or one Attendee that matches the filter.
+     * @param {AttendeeFindUniqueArgs} args - Arguments to find a Attendee
+     * @example
+     * // Get one Attendee
+     * const attendee = await prisma.attendee.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AttendeeFindUniqueArgs>(args: SelectSubset<T, AttendeeFindUniqueArgs<ExtArgs>>): Prisma__AttendeeClient<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Attendee that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AttendeeFindUniqueOrThrowArgs} args - Arguments to find a Attendee
+     * @example
+     * // Get one Attendee
+     * const attendee = await prisma.attendee.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AttendeeFindUniqueOrThrowArgs>(args: SelectSubset<T, AttendeeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AttendeeClient<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Attendee that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendeeFindFirstArgs} args - Arguments to find a Attendee
+     * @example
+     * // Get one Attendee
+     * const attendee = await prisma.attendee.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AttendeeFindFirstArgs>(args?: SelectSubset<T, AttendeeFindFirstArgs<ExtArgs>>): Prisma__AttendeeClient<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Attendee that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendeeFindFirstOrThrowArgs} args - Arguments to find a Attendee
+     * @example
+     * // Get one Attendee
+     * const attendee = await prisma.attendee.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AttendeeFindFirstOrThrowArgs>(args?: SelectSubset<T, AttendeeFindFirstOrThrowArgs<ExtArgs>>): Prisma__AttendeeClient<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Attendees that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendeeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Attendees
+     * const attendees = await prisma.attendee.findMany()
+     * 
+     * // Get first 10 Attendees
+     * const attendees = await prisma.attendee.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const attendeeWithIdOnly = await prisma.attendee.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AttendeeFindManyArgs>(args?: SelectSubset<T, AttendeeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Attendee.
+     * @param {AttendeeCreateArgs} args - Arguments to create a Attendee.
+     * @example
+     * // Create one Attendee
+     * const Attendee = await prisma.attendee.create({
+     *   data: {
+     *     // ... data to create a Attendee
+     *   }
+     * })
+     * 
+     */
+    create<T extends AttendeeCreateArgs>(args: SelectSubset<T, AttendeeCreateArgs<ExtArgs>>): Prisma__AttendeeClient<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Attendees.
+     * @param {AttendeeCreateManyArgs} args - Arguments to create many Attendees.
+     * @example
+     * // Create many Attendees
+     * const attendee = await prisma.attendee.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AttendeeCreateManyArgs>(args?: SelectSubset<T, AttendeeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Attendees and returns the data saved in the database.
+     * @param {AttendeeCreateManyAndReturnArgs} args - Arguments to create many Attendees.
+     * @example
+     * // Create many Attendees
+     * const attendee = await prisma.attendee.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Attendees and only return the `id`
+     * const attendeeWithIdOnly = await prisma.attendee.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AttendeeCreateManyAndReturnArgs>(args?: SelectSubset<T, AttendeeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Attendee.
+     * @param {AttendeeDeleteArgs} args - Arguments to delete one Attendee.
+     * @example
+     * // Delete one Attendee
+     * const Attendee = await prisma.attendee.delete({
+     *   where: {
+     *     // ... filter to delete one Attendee
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AttendeeDeleteArgs>(args: SelectSubset<T, AttendeeDeleteArgs<ExtArgs>>): Prisma__AttendeeClient<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Attendee.
+     * @param {AttendeeUpdateArgs} args - Arguments to update one Attendee.
+     * @example
+     * // Update one Attendee
+     * const attendee = await prisma.attendee.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AttendeeUpdateArgs>(args: SelectSubset<T, AttendeeUpdateArgs<ExtArgs>>): Prisma__AttendeeClient<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Attendees.
+     * @param {AttendeeDeleteManyArgs} args - Arguments to filter Attendees to delete.
+     * @example
+     * // Delete a few Attendees
+     * const { count } = await prisma.attendee.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AttendeeDeleteManyArgs>(args?: SelectSubset<T, AttendeeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Attendees.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendeeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Attendees
+     * const attendee = await prisma.attendee.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AttendeeUpdateManyArgs>(args: SelectSubset<T, AttendeeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Attendees and returns the data updated in the database.
+     * @param {AttendeeUpdateManyAndReturnArgs} args - Arguments to update many Attendees.
+     * @example
+     * // Update many Attendees
+     * const attendee = await prisma.attendee.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Attendees and only return the `id`
+     * const attendeeWithIdOnly = await prisma.attendee.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AttendeeUpdateManyAndReturnArgs>(args: SelectSubset<T, AttendeeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Attendee.
+     * @param {AttendeeUpsertArgs} args - Arguments to update or create a Attendee.
+     * @example
+     * // Update or create a Attendee
+     * const attendee = await prisma.attendee.upsert({
+     *   create: {
+     *     // ... data to create a Attendee
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Attendee we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AttendeeUpsertArgs>(args: SelectSubset<T, AttendeeUpsertArgs<ExtArgs>>): Prisma__AttendeeClient<$Result.GetResult<Prisma.$AttendeePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Attendees.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendeeCountArgs} args - Arguments to filter Attendees to count.
+     * @example
+     * // Count the number of Attendees
+     * const count = await prisma.attendee.count({
+     *   where: {
+     *     // ... the filter for the Attendees we want to count
+     *   }
+     * })
+    **/
+    count<T extends AttendeeCountArgs>(
+      args?: Subset<T, AttendeeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AttendeeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Attendee.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendeeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AttendeeAggregateArgs>(args: Subset<T, AttendeeAggregateArgs>): Prisma.PrismaPromise<GetAttendeeAggregateType<T>>
+
+    /**
+     * Group by Attendee.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendeeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AttendeeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AttendeeGroupByArgs['orderBy'] }
+        : { orderBy?: AttendeeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AttendeeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAttendeeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Attendee model
+   */
+  readonly fields: AttendeeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Attendee.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AttendeeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    event<T extends EventDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventDefaultArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Attendee model
+   */
+  interface AttendeeFieldRefs {
+    readonly id: FieldRef<"Attendee", 'String'>
+    readonly userId: FieldRef<"Attendee", 'String'>
+    readonly eventId: FieldRef<"Attendee", 'String'>
+    readonly createdAt: FieldRef<"Attendee", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Attendee findUnique
+   */
+  export type AttendeeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Attendee to fetch.
+     */
+    where: AttendeeWhereUniqueInput
+  }
+
+  /**
+   * Attendee findUniqueOrThrow
+   */
+  export type AttendeeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Attendee to fetch.
+     */
+    where: AttendeeWhereUniqueInput
+  }
+
+  /**
+   * Attendee findFirst
+   */
+  export type AttendeeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Attendee to fetch.
+     */
+    where?: AttendeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Attendees to fetch.
+     */
+    orderBy?: AttendeeOrderByWithRelationInput | AttendeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Attendees.
+     */
+    cursor?: AttendeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Attendees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Attendees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Attendees.
+     */
+    distinct?: AttendeeScalarFieldEnum | AttendeeScalarFieldEnum[]
+  }
+
+  /**
+   * Attendee findFirstOrThrow
+   */
+  export type AttendeeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Attendee to fetch.
+     */
+    where?: AttendeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Attendees to fetch.
+     */
+    orderBy?: AttendeeOrderByWithRelationInput | AttendeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Attendees.
+     */
+    cursor?: AttendeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Attendees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Attendees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Attendees.
+     */
+    distinct?: AttendeeScalarFieldEnum | AttendeeScalarFieldEnum[]
+  }
+
+  /**
+   * Attendee findMany
+   */
+  export type AttendeeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Attendees to fetch.
+     */
+    where?: AttendeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Attendees to fetch.
+     */
+    orderBy?: AttendeeOrderByWithRelationInput | AttendeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Attendees.
+     */
+    cursor?: AttendeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Attendees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Attendees.
+     */
+    skip?: number
+    distinct?: AttendeeScalarFieldEnum | AttendeeScalarFieldEnum[]
+  }
+
+  /**
+   * Attendee create
+   */
+  export type AttendeeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Attendee.
+     */
+    data: XOR<AttendeeCreateInput, AttendeeUncheckedCreateInput>
+  }
+
+  /**
+   * Attendee createMany
+   */
+  export type AttendeeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Attendees.
+     */
+    data: AttendeeCreateManyInput | AttendeeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Attendee createManyAndReturn
+   */
+  export type AttendeeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * The data used to create many Attendees.
+     */
+    data: AttendeeCreateManyInput | AttendeeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Attendee update
+   */
+  export type AttendeeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Attendee.
+     */
+    data: XOR<AttendeeUpdateInput, AttendeeUncheckedUpdateInput>
+    /**
+     * Choose, which Attendee to update.
+     */
+    where: AttendeeWhereUniqueInput
+  }
+
+  /**
+   * Attendee updateMany
+   */
+  export type AttendeeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Attendees.
+     */
+    data: XOR<AttendeeUpdateManyMutationInput, AttendeeUncheckedUpdateManyInput>
+    /**
+     * Filter which Attendees to update
+     */
+    where?: AttendeeWhereInput
+    /**
+     * Limit how many Attendees to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Attendee updateManyAndReturn
+   */
+  export type AttendeeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * The data used to update Attendees.
+     */
+    data: XOR<AttendeeUpdateManyMutationInput, AttendeeUncheckedUpdateManyInput>
+    /**
+     * Filter which Attendees to update
+     */
+    where?: AttendeeWhereInput
+    /**
+     * Limit how many Attendees to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Attendee upsert
+   */
+  export type AttendeeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Attendee to update in case it exists.
+     */
+    where: AttendeeWhereUniqueInput
+    /**
+     * In case the Attendee found by the `where` argument doesn't exist, create a new Attendee with this data.
+     */
+    create: XOR<AttendeeCreateInput, AttendeeUncheckedCreateInput>
+    /**
+     * In case the Attendee was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AttendeeUpdateInput, AttendeeUncheckedUpdateInput>
+  }
+
+  /**
+   * Attendee delete
+   */
+  export type AttendeeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeInclude<ExtArgs> | null
+    /**
+     * Filter which Attendee to delete.
+     */
+    where: AttendeeWhereUniqueInput
+  }
+
+  /**
+   * Attendee deleteMany
+   */
+  export type AttendeeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Attendees to delete
+     */
+    where?: AttendeeWhereInput
+    /**
+     * Limit how many Attendees to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Attendee without action
+   */
+  export type AttendeeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendee
+     */
+    select?: AttendeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendee
+     */
+    omit?: AttendeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeeInclude<ExtArgs> | null
   }
 
 
@@ -12174,7 +13456,8 @@ export namespace Prisma {
     userId: 'userId',
     githubUrl: 'githubUrl',
     portfolioUrl: 'portfolioUrl',
-    skills: 'skills'
+    skills: 'skills',
+    profileImageUrl: 'profileImageUrl'
   };
 
   export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
@@ -12253,12 +13536,23 @@ export namespace Prisma {
     location: 'location',
     eventLink: 'eventLink',
     hostId: 'hostId',
+    status: 'status',
     eventImage: 'eventImage',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+  export const AttendeeScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    eventId: 'eventId',
+    createdAt: 'createdAt'
+  };
+
+  export type AttendeeScalarFieldEnum = (typeof AttendeeScalarFieldEnum)[keyof typeof AttendeeScalarFieldEnum]
 
 
   export const BlogScalarFieldEnum: {
@@ -12414,6 +13708,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'EventStatus'
+   */
+  export type EnumEventStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'EventStatus[]'
+   */
+  export type ListEnumEventStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -12451,6 +13759,7 @@ export namespace Prisma {
     comments?: CommentListRelationFilter
     notifications?: NotificationListRelationFilter
     eventsHosted?: EventListRelationFilter
+    eventsAttended?: AttendeeListRelationFilter
     blogs?: BlogListRelationFilter
   }
 
@@ -12472,6 +13781,7 @@ export namespace Prisma {
     comments?: CommentOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
     eventsHosted?: EventOrderByRelationAggregateInput
+    eventsAttended?: AttendeeOrderByRelationAggregateInput
     blogs?: BlogOrderByRelationAggregateInput
   }
 
@@ -12496,6 +13806,7 @@ export namespace Prisma {
     comments?: CommentListRelationFilter
     notifications?: NotificationListRelationFilter
     eventsHosted?: EventListRelationFilter
+    eventsAttended?: AttendeeListRelationFilter
     blogs?: BlogListRelationFilter
   }, "id" | "email" | "phone">
 
@@ -12545,6 +13856,7 @@ export namespace Prisma {
     githubUrl?: StringNullableFilter<"Profile"> | string | null
     portfolioUrl?: StringNullableFilter<"Profile"> | string | null
     skills?: StringNullableListFilter<"Profile">
+    profileImageUrl?: StringNullableFilter<"Profile"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -12559,6 +13871,7 @@ export namespace Prisma {
     githubUrl?: SortOrderInput | SortOrder
     portfolioUrl?: SortOrderInput | SortOrder
     skills?: SortOrder
+    profileImageUrl?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -12576,6 +13889,7 @@ export namespace Prisma {
     githubUrl?: StringNullableFilter<"Profile"> | string | null
     portfolioUrl?: StringNullableFilter<"Profile"> | string | null
     skills?: StringNullableListFilter<"Profile">
+    profileImageUrl?: StringNullableFilter<"Profile"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
@@ -12590,6 +13904,7 @@ export namespace Prisma {
     githubUrl?: SortOrderInput | SortOrder
     portfolioUrl?: SortOrderInput | SortOrder
     skills?: SortOrder
+    profileImageUrl?: SortOrderInput | SortOrder
     _count?: ProfileCountOrderByAggregateInput
     _max?: ProfileMaxOrderByAggregateInput
     _min?: ProfileMinOrderByAggregateInput
@@ -12609,6 +13924,7 @@ export namespace Prisma {
     githubUrl?: StringNullableWithAggregatesFilter<"Profile"> | string | null
     portfolioUrl?: StringNullableWithAggregatesFilter<"Profile"> | string | null
     skills?: StringNullableListFilter<"Profile">
+    profileImageUrl?: StringNullableWithAggregatesFilter<"Profile"> | string | null
   }
 
   export type FollowWhereInput = {
@@ -12962,10 +14278,12 @@ export namespace Prisma {
     location?: StringFilter<"Event"> | string
     eventLink?: StringNullableFilter<"Event"> | string | null
     hostId?: StringFilter<"Event"> | string
+    status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
     eventImage?: StringNullableFilter<"Event"> | string | null
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
     host?: XOR<UserScalarRelationFilter, UserWhereInput>
+    attendees?: AttendeeListRelationFilter
   }
 
   export type EventOrderByWithRelationInput = {
@@ -12977,10 +14295,12 @@ export namespace Prisma {
     location?: SortOrder
     eventLink?: SortOrderInput | SortOrder
     hostId?: SortOrder
+    status?: SortOrder
     eventImage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     host?: UserOrderByWithRelationInput
+    attendees?: AttendeeOrderByRelationAggregateInput
   }
 
   export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -12995,10 +14315,12 @@ export namespace Prisma {
     location?: StringFilter<"Event"> | string
     eventLink?: StringNullableFilter<"Event"> | string | null
     hostId?: StringFilter<"Event"> | string
+    status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
     eventImage?: StringNullableFilter<"Event"> | string | null
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
     host?: XOR<UserScalarRelationFilter, UserWhereInput>
+    attendees?: AttendeeListRelationFilter
   }, "id">
 
   export type EventOrderByWithAggregationInput = {
@@ -13010,6 +14332,7 @@ export namespace Prisma {
     location?: SortOrder
     eventLink?: SortOrderInput | SortOrder
     hostId?: SortOrder
+    status?: SortOrder
     eventImage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -13030,9 +14353,64 @@ export namespace Prisma {
     location?: StringWithAggregatesFilter<"Event"> | string
     eventLink?: StringNullableWithAggregatesFilter<"Event"> | string | null
     hostId?: StringWithAggregatesFilter<"Event"> | string
+    status?: EnumEventStatusWithAggregatesFilter<"Event"> | $Enums.EventStatus
     eventImage?: StringNullableWithAggregatesFilter<"Event"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+  }
+
+  export type AttendeeWhereInput = {
+    AND?: AttendeeWhereInput | AttendeeWhereInput[]
+    OR?: AttendeeWhereInput[]
+    NOT?: AttendeeWhereInput | AttendeeWhereInput[]
+    id?: StringFilter<"Attendee"> | string
+    userId?: StringFilter<"Attendee"> | string
+    eventId?: StringFilter<"Attendee"> | string
+    createdAt?: DateTimeFilter<"Attendee"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+  }
+
+  export type AttendeeOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    eventId?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    event?: EventOrderByWithRelationInput
+  }
+
+  export type AttendeeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    eventId_userId?: AttendeeEventIdUserIdCompoundUniqueInput
+    AND?: AttendeeWhereInput | AttendeeWhereInput[]
+    OR?: AttendeeWhereInput[]
+    NOT?: AttendeeWhereInput | AttendeeWhereInput[]
+    userId?: StringFilter<"Attendee"> | string
+    eventId?: StringFilter<"Attendee"> | string
+    createdAt?: DateTimeFilter<"Attendee"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+  }, "id" | "eventId_userId">
+
+  export type AttendeeOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    eventId?: SortOrder
+    createdAt?: SortOrder
+    _count?: AttendeeCountOrderByAggregateInput
+    _max?: AttendeeMaxOrderByAggregateInput
+    _min?: AttendeeMinOrderByAggregateInput
+  }
+
+  export type AttendeeScalarWhereWithAggregatesInput = {
+    AND?: AttendeeScalarWhereWithAggregatesInput | AttendeeScalarWhereWithAggregatesInput[]
+    OR?: AttendeeScalarWhereWithAggregatesInput[]
+    NOT?: AttendeeScalarWhereWithAggregatesInput | AttendeeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Attendee"> | string
+    userId?: StringWithAggregatesFilter<"Attendee"> | string
+    eventId?: StringWithAggregatesFilter<"Attendee"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Attendee"> | Date | string
   }
 
   export type BlogWhereInput = {
@@ -13138,6 +14516,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     eventsHosted?: EventCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeCreateNestedManyWithoutUserInput
     blogs?: BlogCreateNestedManyWithoutAuthorInput
   }
 
@@ -13159,6 +14538,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     eventsHosted?: EventUncheckedCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeUncheckedCreateNestedManyWithoutUserInput
     blogs?: BlogUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -13180,6 +14560,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUpdateManyWithoutUserNestedInput
     blogs?: BlogUpdateManyWithoutAuthorNestedInput
   }
 
@@ -13201,6 +14582,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUncheckedUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUncheckedUpdateManyWithoutUserNestedInput
     blogs?: BlogUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -13253,6 +14635,7 @@ export namespace Prisma {
     githubUrl?: string | null
     portfolioUrl?: string | null
     skills?: ProfileCreateskillsInput | string[]
+    profileImageUrl?: string | null
     user: UserCreateNestedOneWithoutProfileInput
   }
 
@@ -13267,6 +14650,7 @@ export namespace Prisma {
     githubUrl?: string | null
     portfolioUrl?: string | null
     skills?: ProfileCreateskillsInput | string[]
+    profileImageUrl?: string | null
   }
 
   export type ProfileUpdateInput = {
@@ -13279,6 +14663,7 @@ export namespace Prisma {
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: ProfileUpdateskillsInput | string[]
+    profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutProfileNestedInput
   }
 
@@ -13293,6 +14678,7 @@ export namespace Prisma {
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: ProfileUpdateskillsInput | string[]
+    profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfileCreateManyInput = {
@@ -13306,6 +14692,7 @@ export namespace Prisma {
     githubUrl?: string | null
     portfolioUrl?: string | null
     skills?: ProfileCreateskillsInput | string[]
+    profileImageUrl?: string | null
   }
 
   export type ProfileUpdateManyMutationInput = {
@@ -13318,6 +14705,7 @@ export namespace Prisma {
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: ProfileUpdateskillsInput | string[]
+    profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfileUncheckedUpdateManyInput = {
@@ -13331,6 +14719,7 @@ export namespace Prisma {
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: ProfileUpdateskillsInput | string[]
+    profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FollowCreateInput = {
@@ -13681,10 +15070,12 @@ export namespace Prisma {
     time: Date | string
     location: string
     eventLink?: string | null
+    status?: $Enums.EventStatus
     eventImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     host: UserCreateNestedOneWithoutEventsHostedInput
+    attendees?: AttendeeCreateNestedManyWithoutEventInput
   }
 
   export type EventUncheckedCreateInput = {
@@ -13696,9 +15087,11 @@ export namespace Prisma {
     location: string
     eventLink?: string | null
     hostId: string
+    status?: $Enums.EventStatus
     eventImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    attendees?: AttendeeUncheckedCreateNestedManyWithoutEventInput
   }
 
   export type EventUpdateInput = {
@@ -13709,10 +15102,12 @@ export namespace Prisma {
     time?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: StringFieldUpdateOperationsInput | string
     eventLink?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     eventImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     host?: UserUpdateOneRequiredWithoutEventsHostedNestedInput
+    attendees?: AttendeeUpdateManyWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateInput = {
@@ -13724,9 +15119,11 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     eventLink?: NullableStringFieldUpdateOperationsInput | string | null
     hostId?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     eventImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attendees?: AttendeeUncheckedUpdateManyWithoutEventNestedInput
   }
 
   export type EventCreateManyInput = {
@@ -13738,6 +15135,7 @@ export namespace Prisma {
     location: string
     eventLink?: string | null
     hostId: string
+    status?: $Enums.EventStatus
     eventImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13751,6 +15149,7 @@ export namespace Prisma {
     time?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: StringFieldUpdateOperationsInput | string
     eventLink?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     eventImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13765,9 +15164,57 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     eventLink?: NullableStringFieldUpdateOperationsInput | string | null
     hostId?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     eventImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AttendeeCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutEventsAttendedInput
+    event: EventCreateNestedOneWithoutAttendeesInput
+  }
+
+  export type AttendeeUncheckedCreateInput = {
+    id?: string
+    userId: string
+    eventId: string
+    createdAt?: Date | string
+  }
+
+  export type AttendeeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutEventsAttendedNestedInput
+    event?: EventUpdateOneRequiredWithoutAttendeesNestedInput
+  }
+
+  export type AttendeeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AttendeeCreateManyInput = {
+    id?: string
+    userId: string
+    eventId: string
+    createdAt?: Date | string
+  }
+
+  export type AttendeeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AttendeeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BlogCreateInput = {
@@ -13947,6 +15394,12 @@ export namespace Prisma {
     none?: EventWhereInput
   }
 
+  export type AttendeeListRelationFilter = {
+    every?: AttendeeWhereInput
+    some?: AttendeeWhereInput
+    none?: AttendeeWhereInput
+  }
+
   export type BlogListRelationFilter = {
     every?: BlogWhereInput
     some?: BlogWhereInput
@@ -13975,6 +15428,10 @@ export namespace Prisma {
   }
 
   export type EventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AttendeeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14105,6 +15562,7 @@ export namespace Prisma {
     githubUrl?: SortOrder
     portfolioUrl?: SortOrder
     skills?: SortOrder
+    profileImageUrl?: SortOrder
   }
 
   export type ProfileMaxOrderByAggregateInput = {
@@ -14117,6 +15575,7 @@ export namespace Prisma {
     userId?: SortOrder
     githubUrl?: SortOrder
     portfolioUrl?: SortOrder
+    profileImageUrl?: SortOrder
   }
 
   export type ProfileMinOrderByAggregateInput = {
@@ -14129,6 +15588,7 @@ export namespace Prisma {
     userId?: SortOrder
     githubUrl?: SortOrder
     portfolioUrl?: SortOrder
+    profileImageUrl?: SortOrder
   }
 
   export type FollowCountOrderByAggregateInput = {
@@ -14409,6 +15869,13 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type EnumEventStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.EventStatus | EnumEventStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEventStatusFilter<$PrismaModel> | $Enums.EventStatus
+  }
+
   export type EventCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -14418,6 +15885,7 @@ export namespace Prisma {
     location?: SortOrder
     eventLink?: SortOrder
     hostId?: SortOrder
+    status?: SortOrder
     eventImage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -14432,6 +15900,7 @@ export namespace Prisma {
     location?: SortOrder
     eventLink?: SortOrder
     hostId?: SortOrder
+    status?: SortOrder
     eventImage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -14446,9 +15915,51 @@ export namespace Prisma {
     location?: SortOrder
     eventLink?: SortOrder
     hostId?: SortOrder
+    status?: SortOrder
     eventImage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EnumEventStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EventStatus | EnumEventStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEventStatusWithAggregatesFilter<$PrismaModel> | $Enums.EventStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEventStatusFilter<$PrismaModel>
+    _max?: NestedEnumEventStatusFilter<$PrismaModel>
+  }
+
+  export type EventScalarRelationFilter = {
+    is?: EventWhereInput
+    isNot?: EventWhereInput
+  }
+
+  export type AttendeeEventIdUserIdCompoundUniqueInput = {
+    eventId: string
+    userId: string
+  }
+
+  export type AttendeeCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    eventId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AttendeeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    eventId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AttendeeMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    eventId?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type BlogCountOrderByAggregateInput = {
@@ -14544,6 +16055,13 @@ export namespace Prisma {
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
   }
 
+  export type AttendeeCreateNestedManyWithoutUserInput = {
+    create?: XOR<AttendeeCreateWithoutUserInput, AttendeeUncheckedCreateWithoutUserInput> | AttendeeCreateWithoutUserInput[] | AttendeeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AttendeeCreateOrConnectWithoutUserInput | AttendeeCreateOrConnectWithoutUserInput[]
+    createMany?: AttendeeCreateManyUserInputEnvelope
+    connect?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+  }
+
   export type BlogCreateNestedManyWithoutAuthorInput = {
     create?: XOR<BlogCreateWithoutAuthorInput, BlogUncheckedCreateWithoutAuthorInput> | BlogCreateWithoutAuthorInput[] | BlogUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: BlogCreateOrConnectWithoutAuthorInput | BlogCreateOrConnectWithoutAuthorInput[]
@@ -14597,6 +16115,13 @@ export namespace Prisma {
     connectOrCreate?: EventCreateOrConnectWithoutHostInput | EventCreateOrConnectWithoutHostInput[]
     createMany?: EventCreateManyHostInputEnvelope
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type AttendeeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AttendeeCreateWithoutUserInput, AttendeeUncheckedCreateWithoutUserInput> | AttendeeCreateWithoutUserInput[] | AttendeeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AttendeeCreateOrConnectWithoutUserInput | AttendeeCreateOrConnectWithoutUserInput[]
+    createMany?: AttendeeCreateManyUserInputEnvelope
+    connect?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
   }
 
   export type BlogUncheckedCreateNestedManyWithoutAuthorInput = {
@@ -14716,6 +16241,20 @@ export namespace Prisma {
     deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
   }
 
+  export type AttendeeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AttendeeCreateWithoutUserInput, AttendeeUncheckedCreateWithoutUserInput> | AttendeeCreateWithoutUserInput[] | AttendeeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AttendeeCreateOrConnectWithoutUserInput | AttendeeCreateOrConnectWithoutUserInput[]
+    upsert?: AttendeeUpsertWithWhereUniqueWithoutUserInput | AttendeeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AttendeeCreateManyUserInputEnvelope
+    set?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    disconnect?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    delete?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    connect?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    update?: AttendeeUpdateWithWhereUniqueWithoutUserInput | AttendeeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AttendeeUpdateManyWithWhereWithoutUserInput | AttendeeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AttendeeScalarWhereInput | AttendeeScalarWhereInput[]
+  }
+
   export type BlogUpdateManyWithoutAuthorNestedInput = {
     create?: XOR<BlogCreateWithoutAuthorInput, BlogUncheckedCreateWithoutAuthorInput> | BlogCreateWithoutAuthorInput[] | BlogUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: BlogCreateOrConnectWithoutAuthorInput | BlogCreateOrConnectWithoutAuthorInput[]
@@ -14822,6 +16361,20 @@ export namespace Prisma {
     update?: EventUpdateWithWhereUniqueWithoutHostInput | EventUpdateWithWhereUniqueWithoutHostInput[]
     updateMany?: EventUpdateManyWithWhereWithoutHostInput | EventUpdateManyWithWhereWithoutHostInput[]
     deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type AttendeeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AttendeeCreateWithoutUserInput, AttendeeUncheckedCreateWithoutUserInput> | AttendeeCreateWithoutUserInput[] | AttendeeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AttendeeCreateOrConnectWithoutUserInput | AttendeeCreateOrConnectWithoutUserInput[]
+    upsert?: AttendeeUpsertWithWhereUniqueWithoutUserInput | AttendeeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AttendeeCreateManyUserInputEnvelope
+    set?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    disconnect?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    delete?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    connect?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    update?: AttendeeUpdateWithWhereUniqueWithoutUserInput | AttendeeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AttendeeUpdateManyWithWhereWithoutUserInput | AttendeeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AttendeeScalarWhereInput | AttendeeScalarWhereInput[]
   }
 
   export type BlogUncheckedUpdateManyWithoutAuthorNestedInput = {
@@ -15093,12 +16646,86 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type AttendeeCreateNestedManyWithoutEventInput = {
+    create?: XOR<AttendeeCreateWithoutEventInput, AttendeeUncheckedCreateWithoutEventInput> | AttendeeCreateWithoutEventInput[] | AttendeeUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: AttendeeCreateOrConnectWithoutEventInput | AttendeeCreateOrConnectWithoutEventInput[]
+    createMany?: AttendeeCreateManyEventInputEnvelope
+    connect?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+  }
+
+  export type AttendeeUncheckedCreateNestedManyWithoutEventInput = {
+    create?: XOR<AttendeeCreateWithoutEventInput, AttendeeUncheckedCreateWithoutEventInput> | AttendeeCreateWithoutEventInput[] | AttendeeUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: AttendeeCreateOrConnectWithoutEventInput | AttendeeCreateOrConnectWithoutEventInput[]
+    createMany?: AttendeeCreateManyEventInputEnvelope
+    connect?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+  }
+
+  export type EnumEventStatusFieldUpdateOperationsInput = {
+    set?: $Enums.EventStatus
+  }
+
   export type UserUpdateOneRequiredWithoutEventsHostedNestedInput = {
     create?: XOR<UserCreateWithoutEventsHostedInput, UserUncheckedCreateWithoutEventsHostedInput>
     connectOrCreate?: UserCreateOrConnectWithoutEventsHostedInput
     upsert?: UserUpsertWithoutEventsHostedInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEventsHostedInput, UserUpdateWithoutEventsHostedInput>, UserUncheckedUpdateWithoutEventsHostedInput>
+  }
+
+  export type AttendeeUpdateManyWithoutEventNestedInput = {
+    create?: XOR<AttendeeCreateWithoutEventInput, AttendeeUncheckedCreateWithoutEventInput> | AttendeeCreateWithoutEventInput[] | AttendeeUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: AttendeeCreateOrConnectWithoutEventInput | AttendeeCreateOrConnectWithoutEventInput[]
+    upsert?: AttendeeUpsertWithWhereUniqueWithoutEventInput | AttendeeUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: AttendeeCreateManyEventInputEnvelope
+    set?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    disconnect?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    delete?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    connect?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    update?: AttendeeUpdateWithWhereUniqueWithoutEventInput | AttendeeUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: AttendeeUpdateManyWithWhereWithoutEventInput | AttendeeUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: AttendeeScalarWhereInput | AttendeeScalarWhereInput[]
+  }
+
+  export type AttendeeUncheckedUpdateManyWithoutEventNestedInput = {
+    create?: XOR<AttendeeCreateWithoutEventInput, AttendeeUncheckedCreateWithoutEventInput> | AttendeeCreateWithoutEventInput[] | AttendeeUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: AttendeeCreateOrConnectWithoutEventInput | AttendeeCreateOrConnectWithoutEventInput[]
+    upsert?: AttendeeUpsertWithWhereUniqueWithoutEventInput | AttendeeUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: AttendeeCreateManyEventInputEnvelope
+    set?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    disconnect?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    delete?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    connect?: AttendeeWhereUniqueInput | AttendeeWhereUniqueInput[]
+    update?: AttendeeUpdateWithWhereUniqueWithoutEventInput | AttendeeUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: AttendeeUpdateManyWithWhereWithoutEventInput | AttendeeUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: AttendeeScalarWhereInput | AttendeeScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutEventsAttendedInput = {
+    create?: XOR<UserCreateWithoutEventsAttendedInput, UserUncheckedCreateWithoutEventsAttendedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEventsAttendedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EventCreateNestedOneWithoutAttendeesInput = {
+    create?: XOR<EventCreateWithoutAttendeesInput, EventUncheckedCreateWithoutAttendeesInput>
+    connectOrCreate?: EventCreateOrConnectWithoutAttendeesInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutEventsAttendedNestedInput = {
+    create?: XOR<UserCreateWithoutEventsAttendedInput, UserUncheckedCreateWithoutEventsAttendedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEventsAttendedInput
+    upsert?: UserUpsertWithoutEventsAttendedInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEventsAttendedInput, UserUpdateWithoutEventsAttendedInput>, UserUncheckedUpdateWithoutEventsAttendedInput>
+  }
+
+  export type EventUpdateOneRequiredWithoutAttendeesNestedInput = {
+    create?: XOR<EventCreateWithoutAttendeesInput, EventUncheckedCreateWithoutAttendeesInput>
+    connectOrCreate?: EventCreateOrConnectWithoutAttendeesInput
+    upsert?: EventUpsertWithoutAttendeesInput
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutAttendeesInput, EventUpdateWithoutAttendeesInput>, EventUncheckedUpdateWithoutAttendeesInput>
   }
 
   export type BlogCreatetagsInput = {
@@ -15372,6 +16999,23 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedEnumEventStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.EventStatus | EnumEventStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEventStatusFilter<$PrismaModel> | $Enums.EventStatus
+  }
+
+  export type NestedEnumEventStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EventStatus | EnumEventStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEventStatusWithAggregatesFilter<$PrismaModel> | $Enums.EventStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEventStatusFilter<$PrismaModel>
+    _max?: NestedEnumEventStatusFilter<$PrismaModel>
+  }
+
   export type ProfileCreateWithoutUserInput = {
     id?: string
     userName: string
@@ -15382,6 +17026,7 @@ export namespace Prisma {
     githubUrl?: string | null
     portfolioUrl?: string | null
     skills?: ProfileCreateskillsInput | string[]
+    profileImageUrl?: string | null
   }
 
   export type ProfileUncheckedCreateWithoutUserInput = {
@@ -15394,6 +17039,7 @@ export namespace Prisma {
     githubUrl?: string | null
     portfolioUrl?: string | null
     skills?: ProfileCreateskillsInput | string[]
+    profileImageUrl?: string | null
   }
 
   export type ProfileCreateOrConnectWithoutUserInput = {
@@ -15549,9 +17195,11 @@ export namespace Prisma {
     time: Date | string
     location: string
     eventLink?: string | null
+    status?: $Enums.EventStatus
     eventImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    attendees?: AttendeeCreateNestedManyWithoutEventInput
   }
 
   export type EventUncheckedCreateWithoutHostInput = {
@@ -15562,9 +17210,11 @@ export namespace Prisma {
     time: Date | string
     location: string
     eventLink?: string | null
+    status?: $Enums.EventStatus
     eventImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    attendees?: AttendeeUncheckedCreateNestedManyWithoutEventInput
   }
 
   export type EventCreateOrConnectWithoutHostInput = {
@@ -15574,6 +17224,28 @@ export namespace Prisma {
 
   export type EventCreateManyHostInputEnvelope = {
     data: EventCreateManyHostInput | EventCreateManyHostInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AttendeeCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    event: EventCreateNestedOneWithoutAttendeesInput
+  }
+
+  export type AttendeeUncheckedCreateWithoutUserInput = {
+    id?: string
+    eventId: string
+    createdAt?: Date | string
+  }
+
+  export type AttendeeCreateOrConnectWithoutUserInput = {
+    where: AttendeeWhereUniqueInput
+    create: XOR<AttendeeCreateWithoutUserInput, AttendeeUncheckedCreateWithoutUserInput>
+  }
+
+  export type AttendeeCreateManyUserInputEnvelope = {
+    data: AttendeeCreateManyUserInput | AttendeeCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -15634,6 +17306,7 @@ export namespace Prisma {
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: ProfileUpdateskillsInput | string[]
+    profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfileUncheckedUpdateWithoutUserInput = {
@@ -15646,6 +17319,7 @@ export namespace Prisma {
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: ProfileUpdateskillsInput | string[]
+    profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FollowUpsertWithWhereUniqueWithoutFollowerInput = {
@@ -15809,9 +17483,36 @@ export namespace Prisma {
     location?: StringFilter<"Event"> | string
     eventLink?: StringNullableFilter<"Event"> | string | null
     hostId?: StringFilter<"Event"> | string
+    status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
     eventImage?: StringNullableFilter<"Event"> | string | null
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
+  }
+
+  export type AttendeeUpsertWithWhereUniqueWithoutUserInput = {
+    where: AttendeeWhereUniqueInput
+    update: XOR<AttendeeUpdateWithoutUserInput, AttendeeUncheckedUpdateWithoutUserInput>
+    create: XOR<AttendeeCreateWithoutUserInput, AttendeeUncheckedCreateWithoutUserInput>
+  }
+
+  export type AttendeeUpdateWithWhereUniqueWithoutUserInput = {
+    where: AttendeeWhereUniqueInput
+    data: XOR<AttendeeUpdateWithoutUserInput, AttendeeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AttendeeUpdateManyWithWhereWithoutUserInput = {
+    where: AttendeeScalarWhereInput
+    data: XOR<AttendeeUpdateManyMutationInput, AttendeeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AttendeeScalarWhereInput = {
+    AND?: AttendeeScalarWhereInput | AttendeeScalarWhereInput[]
+    OR?: AttendeeScalarWhereInput[]
+    NOT?: AttendeeScalarWhereInput | AttendeeScalarWhereInput[]
+    id?: StringFilter<"Attendee"> | string
+    userId?: StringFilter<"Attendee"> | string
+    eventId?: StringFilter<"Attendee"> | string
+    createdAt?: DateTimeFilter<"Attendee"> | Date | string
   }
 
   export type BlogUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -15863,6 +17564,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     eventsHosted?: EventCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeCreateNestedManyWithoutUserInput
     blogs?: BlogCreateNestedManyWithoutAuthorInput
   }
 
@@ -15883,6 +17585,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     eventsHosted?: EventUncheckedCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeUncheckedCreateNestedManyWithoutUserInput
     blogs?: BlogUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -15919,6 +17622,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUpdateManyWithoutUserNestedInput
     blogs?: BlogUpdateManyWithoutAuthorNestedInput
   }
 
@@ -15939,6 +17643,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUncheckedUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUncheckedUpdateManyWithoutUserNestedInput
     blogs?: BlogUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -15959,6 +17664,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     eventsHosted?: EventCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeCreateNestedManyWithoutUserInput
     blogs?: BlogCreateNestedManyWithoutAuthorInput
   }
 
@@ -15979,6 +17685,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     eventsHosted?: EventUncheckedCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeUncheckedCreateNestedManyWithoutUserInput
     blogs?: BlogUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -16004,6 +17711,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     eventsHosted?: EventCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeCreateNestedManyWithoutUserInput
     blogs?: BlogCreateNestedManyWithoutAuthorInput
   }
 
@@ -16024,6 +17732,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     eventsHosted?: EventUncheckedCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeUncheckedCreateNestedManyWithoutUserInput
     blogs?: BlogUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -16060,6 +17769,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUpdateManyWithoutUserNestedInput
     blogs?: BlogUpdateManyWithoutAuthorNestedInput
   }
 
@@ -16080,6 +17790,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUncheckedUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUncheckedUpdateManyWithoutUserNestedInput
     blogs?: BlogUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -16111,6 +17822,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUpdateManyWithoutUserNestedInput
     blogs?: BlogUpdateManyWithoutAuthorNestedInput
   }
 
@@ -16131,6 +17843,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUncheckedUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUncheckedUpdateManyWithoutUserNestedInput
     blogs?: BlogUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -16151,6 +17864,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     eventsHosted?: EventCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeCreateNestedManyWithoutUserInput
     blogs?: BlogCreateNestedManyWithoutAuthorInput
   }
 
@@ -16171,6 +17885,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     eventsHosted?: EventUncheckedCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeUncheckedCreateNestedManyWithoutUserInput
     blogs?: BlogUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -16253,6 +17968,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUpdateManyWithoutUserNestedInput
     blogs?: BlogUpdateManyWithoutAuthorNestedInput
   }
 
@@ -16273,6 +17989,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUncheckedUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUncheckedUpdateManyWithoutUserNestedInput
     blogs?: BlogUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -16413,6 +18130,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutAuthorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     eventsHosted?: EventCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeCreateNestedManyWithoutUserInput
     blogs?: BlogCreateNestedManyWithoutAuthorInput
   }
 
@@ -16433,6 +18151,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     eventsHosted?: EventUncheckedCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeUncheckedCreateNestedManyWithoutUserInput
     blogs?: BlogUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -16537,6 +18256,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUpdateManyWithoutUserNestedInput
     blogs?: BlogUpdateManyWithoutAuthorNestedInput
   }
 
@@ -16557,6 +18277,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUncheckedUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUncheckedUpdateManyWithoutUserNestedInput
     blogs?: BlogUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -16657,6 +18378,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     eventsHosted?: EventCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeCreateNestedManyWithoutUserInput
     blogs?: BlogCreateNestedManyWithoutAuthorInput
   }
 
@@ -16677,6 +18399,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     eventsHosted?: EventUncheckedCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeUncheckedCreateNestedManyWithoutUserInput
     blogs?: BlogUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -16713,6 +18436,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     eventsHosted?: EventUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUpdateManyWithoutUserNestedInput
     blogs?: BlogUpdateManyWithoutAuthorNestedInput
   }
 
@@ -16733,6 +18457,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     eventsHosted?: EventUncheckedUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUncheckedUpdateManyWithoutUserNestedInput
     blogs?: BlogUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -16753,6 +18478,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    eventsAttended?: AttendeeCreateNestedManyWithoutUserInput
     blogs?: BlogCreateNestedManyWithoutAuthorInput
   }
 
@@ -16773,12 +18499,35 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    eventsAttended?: AttendeeUncheckedCreateNestedManyWithoutUserInput
     blogs?: BlogUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutEventsHostedInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutEventsHostedInput, UserUncheckedCreateWithoutEventsHostedInput>
+  }
+
+  export type AttendeeCreateWithoutEventInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutEventsAttendedInput
+  }
+
+  export type AttendeeUncheckedCreateWithoutEventInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type AttendeeCreateOrConnectWithoutEventInput = {
+    where: AttendeeWhereUniqueInput
+    create: XOR<AttendeeCreateWithoutEventInput, AttendeeUncheckedCreateWithoutEventInput>
+  }
+
+  export type AttendeeCreateManyEventInputEnvelope = {
+    data: AttendeeCreateManyEventInput | AttendeeCreateManyEventInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutEventsHostedInput = {
@@ -16809,6 +18558,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    eventsAttended?: AttendeeUpdateManyWithoutUserNestedInput
     blogs?: BlogUpdateManyWithoutAuthorNestedInput
   }
 
@@ -16829,7 +18579,200 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    eventsAttended?: AttendeeUncheckedUpdateManyWithoutUserNestedInput
     blogs?: BlogUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type AttendeeUpsertWithWhereUniqueWithoutEventInput = {
+    where: AttendeeWhereUniqueInput
+    update: XOR<AttendeeUpdateWithoutEventInput, AttendeeUncheckedUpdateWithoutEventInput>
+    create: XOR<AttendeeCreateWithoutEventInput, AttendeeUncheckedCreateWithoutEventInput>
+  }
+
+  export type AttendeeUpdateWithWhereUniqueWithoutEventInput = {
+    where: AttendeeWhereUniqueInput
+    data: XOR<AttendeeUpdateWithoutEventInput, AttendeeUncheckedUpdateWithoutEventInput>
+  }
+
+  export type AttendeeUpdateManyWithWhereWithoutEventInput = {
+    where: AttendeeScalarWhereInput
+    data: XOR<AttendeeUpdateManyMutationInput, AttendeeUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type UserCreateWithoutEventsAttendedInput = {
+    id?: string
+    email: string
+    name: string
+    phone?: string | null
+    oauthProvider?: string | null
+    oauthId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    password: string
+    role?: $Enums.Role
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    following?: FollowCreateNestedManyWithoutFollowerInput
+    followers?: FollowCreateNestedManyWithoutFollowingInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    eventsHosted?: EventCreateNestedManyWithoutHostInput
+    blogs?: BlogCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserUncheckedCreateWithoutEventsAttendedInput = {
+    id?: string
+    email: string
+    name: string
+    phone?: string | null
+    oauthProvider?: string | null
+    oauthId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    password: string
+    role?: $Enums.Role
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
+    followers?: FollowUncheckedCreateNestedManyWithoutFollowingInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    eventsHosted?: EventUncheckedCreateNestedManyWithoutHostInput
+    blogs?: BlogUncheckedCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserCreateOrConnectWithoutEventsAttendedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutEventsAttendedInput, UserUncheckedCreateWithoutEventsAttendedInput>
+  }
+
+  export type EventCreateWithoutAttendeesInput = {
+    id?: string
+    title: string
+    description: string
+    date: Date | string
+    time: Date | string
+    location: string
+    eventLink?: string | null
+    status?: $Enums.EventStatus
+    eventImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    host: UserCreateNestedOneWithoutEventsHostedInput
+  }
+
+  export type EventUncheckedCreateWithoutAttendeesInput = {
+    id?: string
+    title: string
+    description: string
+    date: Date | string
+    time: Date | string
+    location: string
+    eventLink?: string | null
+    hostId: string
+    status?: $Enums.EventStatus
+    eventImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventCreateOrConnectWithoutAttendeesInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutAttendeesInput, EventUncheckedCreateWithoutAttendeesInput>
+  }
+
+  export type UserUpsertWithoutEventsAttendedInput = {
+    update: XOR<UserUpdateWithoutEventsAttendedInput, UserUncheckedUpdateWithoutEventsAttendedInput>
+    create: XOR<UserCreateWithoutEventsAttendedInput, UserUncheckedCreateWithoutEventsAttendedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEventsAttendedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEventsAttendedInput, UserUncheckedUpdateWithoutEventsAttendedInput>
+  }
+
+  export type UserUpdateWithoutEventsAttendedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    oauthProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    oauthId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    following?: FollowUpdateManyWithoutFollowerNestedInput
+    followers?: FollowUpdateManyWithoutFollowingNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    eventsHosted?: EventUpdateManyWithoutHostNestedInput
+    blogs?: BlogUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutEventsAttendedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    oauthProvider?: NullableStringFieldUpdateOperationsInput | string | null
+    oauthId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
+    followers?: FollowUncheckedUpdateManyWithoutFollowingNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    eventsHosted?: EventUncheckedUpdateManyWithoutHostNestedInput
+    blogs?: BlogUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type EventUpsertWithoutAttendeesInput = {
+    update: XOR<EventUpdateWithoutAttendeesInput, EventUncheckedUpdateWithoutAttendeesInput>
+    create: XOR<EventCreateWithoutAttendeesInput, EventUncheckedCreateWithoutAttendeesInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutAttendeesInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutAttendeesInput, EventUncheckedUpdateWithoutAttendeesInput>
+  }
+
+  export type EventUpdateWithoutAttendeesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location?: StringFieldUpdateOperationsInput | string
+    eventLink?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    eventImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    host?: UserUpdateOneRequiredWithoutEventsHostedNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutAttendeesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    time?: DateTimeFieldUpdateOperationsInput | Date | string
+    location?: StringFieldUpdateOperationsInput | string
+    eventLink?: NullableStringFieldUpdateOperationsInput | string | null
+    hostId?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    eventImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateWithoutBlogsInput = {
@@ -16850,6 +18793,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     eventsHosted?: EventCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBlogsInput = {
@@ -16870,6 +18814,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     eventsHosted?: EventUncheckedCreateNestedManyWithoutHostInput
+    eventsAttended?: AttendeeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBlogsInput = {
@@ -16934,6 +18879,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlogsInput = {
@@ -16954,6 +18900,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     eventsHosted?: EventUncheckedUpdateManyWithoutHostNestedInput
+    eventsAttended?: AttendeeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommentUpsertWithWhereUniqueWithoutBlogInput = {
@@ -17023,9 +18970,16 @@ export namespace Prisma {
     time: Date | string
     location: string
     eventLink?: string | null
+    status?: $Enums.EventStatus
     eventImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type AttendeeCreateManyUserInput = {
+    id?: string
+    eventId: string
+    createdAt?: Date | string
   }
 
   export type BlogCreateManyAuthorInput = {
@@ -17181,9 +19135,11 @@ export namespace Prisma {
     time?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: StringFieldUpdateOperationsInput | string
     eventLink?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     eventImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attendees?: AttendeeUpdateManyWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateWithoutHostInput = {
@@ -17194,9 +19150,11 @@ export namespace Prisma {
     time?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: StringFieldUpdateOperationsInput | string
     eventLink?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     eventImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attendees?: AttendeeUncheckedUpdateManyWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateManyWithoutHostInput = {
@@ -17207,9 +19165,28 @@ export namespace Prisma {
     time?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: StringFieldUpdateOperationsInput | string
     eventLink?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     eventImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AttendeeUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    event?: EventUpdateOneRequiredWithoutAttendeesNestedInput
+  }
+
+  export type AttendeeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AttendeeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BlogUpdateWithoutAuthorInput = {
@@ -17284,6 +19261,30 @@ export namespace Prisma {
     blogId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AttendeeCreateManyEventInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type AttendeeUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutEventsAttendedNestedInput
+  }
+
+  export type AttendeeUncheckedUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AttendeeUncheckedUpdateManyWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommentCreateManyBlogInput = {

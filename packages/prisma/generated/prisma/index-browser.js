@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.9.0
- * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
+ * Prisma Client JS version: 6.11.1
+ * Query Engine version: f40f79ec31188888a2e33acda0ecc8fd10a853a9
  */
 Prisma.prismaVersion = {
-  client: "6.9.0",
-  engine: "81e4af48011447c3cc503a190e86995b66d2a28e"
+  client: "6.11.1",
+  engine: "f40f79ec31188888a2e33acda0ecc8fd10a853a9"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -143,7 +143,8 @@ exports.Prisma.ProfileScalarFieldEnum = {
   userId: 'userId',
   githubUrl: 'githubUrl',
   portfolioUrl: 'portfolioUrl',
-  skills: 'skills'
+  skills: 'skills',
+  profileImageUrl: 'profileImageUrl'
 };
 
 exports.Prisma.FollowScalarFieldEnum = {
@@ -204,9 +205,17 @@ exports.Prisma.EventScalarFieldEnum = {
   location: 'location',
   eventLink: 'eventLink',
   hostId: 'hostId',
+  status: 'status',
   eventImage: 'eventImage',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AttendeeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  eventId: 'eventId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.BlogScalarFieldEnum = {
@@ -257,6 +266,13 @@ exports.PostType = exports.$Enums.PostType = {
   CODE_QUERY: 'CODE_QUERY'
 };
 
+exports.EventStatus = exports.$Enums.EventStatus = {
+  UPCOMING: 'UPCOMING',
+  ONGOING: 'ONGOING',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Profile: 'Profile',
@@ -266,6 +282,7 @@ exports.Prisma.ModelName = {
   Comment: 'Comment',
   Notification: 'Notification',
   Event: 'Event',
+  Attendee: 'Attendee',
   Blog: 'Blog'
 };
 

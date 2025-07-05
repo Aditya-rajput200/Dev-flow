@@ -29,16 +29,26 @@ for it and we send the meeting deatils to the mails of the user and also inform 
 event on the partilar dates on the mail
 
 🔔 Notification to followers when a user schedules an event
-
 📆 Calendar view of events (grouped by week/month)
-
 🧵 Live Q&A chat (WebSocket-based)
-
 📺 Event recording (stored and accessed later)
 
 
 Reminders
-
 Limited seats
-
 Event access control
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+5. Project Showcases
+
+🧩 Developers can showcase personal projects...
+
+🔗 GitHub/Live link, tech stack used, description, images..
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+💬 Real-time messaging between developers
+
+📡 Use WebSocket/Socket.io
