@@ -1,6 +1,6 @@
 //get all followers
 //get all following
-// mutal connections
+//mutal connections
 //follow user
 //unfollow user
 
