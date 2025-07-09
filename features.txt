@@ -52,3 +52,16 @@ Event access control
 💬 Real-time messaging between developers
 
 📡 Use WebSocket/Socket.io
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+we will implements the profile vlaues or give some rewards on the basics of the user 
+activity like 
+> joining events
+> hosting events
+>createing the blogs and theier likes on the blogs
+>participation in the disscussions
+>likes on th project showcase
