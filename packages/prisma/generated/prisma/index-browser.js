@@ -160,13 +160,13 @@ exports.Prisma.PostScalarFieldEnum = {
   content: 'content',
   authorId: 'authorId',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   type: 'type',
   imageUrl: 'imageUrl',
   videoUrl: 'videoUrl',
   codeQueryId: 'codeQueryId',
-  updatedAt: 'updatedAt',
   tags: 'tags',
-  Claps: 'Claps'
+  claps: 'claps'
 };
 
 exports.Prisma.CodeQueryScalarFieldEnum = {
@@ -183,6 +183,8 @@ exports.Prisma.CommentScalarFieldEnum = {
   authorId: 'authorId',
   postId: 'postId',
   blogId: 'blogId',
+  discussionId: 'discussionId',
+  projectShowcaseId: 'projectShowcaseId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -200,8 +202,7 @@ exports.Prisma.EventScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
-  date: 'date',
-  time: 'time',
+  dateTime: 'dateTime',
   location: 'location',
   eventLink: 'eventLink',
   hostId: 'hostId',
@@ -226,8 +227,55 @@ exports.Prisma.BlogScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   tags: 'tags',
-  Claps: 'Claps',
+  claps: 'claps',
   imageUrl: 'imageUrl',
+  videoUrl: 'videoUrl'
+};
+
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  groupId: 'groupId',
+  content: 'content',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  imageUrl: 'imageUrl',
+  status: 'status',
+  isRead: 'isRead',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DiscussionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  authorId: 'authorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  tags: 'tags',
+  upvotes: 'upvotes',
+  downvotes: 'downvotes'
+};
+
+exports.Prisma.Project_ShowcaseScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  authorId: 'authorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  projectLink: 'projectLink',
+  imageUrl: 'imageUrl',
+  tags: 'tags',
+  claps: 'claps',
   videoUrl: 'videoUrl'
 };
 
@@ -258,7 +306,7 @@ exports.Prisma.JsonNullValueFilter = {
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',
   ADMIN: 'ADMIN',
-  Moderator: 'Moderator'
+  MODERATOR: 'MODERATOR'
 };
 
 exports.PostType = exports.$Enums.PostType = {
@@ -273,6 +321,11 @@ exports.EventStatus = exports.$Enums.EventStatus = {
   CANCELLED: 'CANCELLED'
 };
 
+exports.MessageStatus = exports.$Enums.MessageStatus = {
+  UNDELIVERED: 'UNDELIVERED',
+  DELIVERED: 'DELIVERED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Profile: 'Profile',
@@ -283,7 +336,11 @@ exports.Prisma.ModelName = {
   Notification: 'Notification',
   Event: 'Event',
   Attendee: 'Attendee',
-  Blog: 'Blog'
+  Blog: 'Blog',
+  Message: 'Message',
+  Group: 'Group',
+  Discussion: 'Discussion',
+  Project_Showcase: 'Project_Showcase'
 };
 
 /**

@@ -14,7 +14,9 @@
   "dependencies": {
     "@dev-flow/prisma": "workspace:*",
     "@prisma/client": "^6.9.0",
+    "ably": "^2.10.0",
     "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
     "cloudinary": "^2.7.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -31,6 +33,7 @@
     "nodemailer": "^7.0.3",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
+    "pnpm": "^10.13.1",
     "prisma": "^6.9.0"
   },
   "devDependencies": {

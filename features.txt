@@ -52,6 +52,8 @@ Event access control
 💬 Real-time messaging between developers
 
 📡 Use WebSocket/Socket.io
+implement the send push notifications 
+
 
 
 
@@ -65,3 +67,14 @@ activity like
 >createing the blogs and theier likes on the blogs
 >participation in the disscussions
 >likes on th project showcase
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Ai features
+>>>>Translate blogs into other languages

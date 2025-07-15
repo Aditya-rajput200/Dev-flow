@@ -8,6 +8,7 @@ import { Authrouter } from "./routes/auth";
 import { Userrouter } from "./routes/user";
 import PostRouter from "./routes/post";
 import BlogRouter from "./routes/blog";
+import Message_Router from "./routes/message";
 
 // Load env variables
 dotenv.config();
@@ -29,6 +30,18 @@ const limiter = rateLimit({
   message: "Too many requests from this IP, please try again later.",
 });
 
+// Apply message rate limiter
+const MessageRateLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 100, // limit each IP to 10 requests per windowMs
+  message: {
+    status: 'error',
+    message: 'Too many messages sent from this IP, please try again later.',
+  },
+});
+
+
+
 app.use(limiter);
 
 // Routes
@@ -36,6 +49,7 @@ app.use("/api/auth", Authrouter);
 app.use("/api/user", Userrouter);
 app.use("/api/post", PostRouter);
 app.use("/api/blog", BlogRouter);
+app.use("/api",MessageRateLimiter,Message_Router);
 
 // Server start
 app.listen(PORT, () => {

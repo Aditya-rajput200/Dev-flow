@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
+    "ably": "^2.10.0",
+    "keyv": "^5.3.4",
     "next": "^15.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

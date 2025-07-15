@@ -1,4 +1,4 @@
-// create queation
+// create discussion 
 //answer on the disscusion 
 // upvote the question
 // upvote the answers

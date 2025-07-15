@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -14,121 +8,129 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id       String   @id @default(cuid())
-  email     String   @unique
-  name      String
-  phone     String?   @unique
-  oauthProvider String?
-  oauthId      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  password  String 
-  role     Role      @default(USER)
-  profile  Profile?
-  following    Follow[]   @relation("follower")
-  followers    Follow[]   @relation("following")
-  posts         Post[]
-  comments      Comment[]
-  notifications  Notification[]
-  eventsHosted   Event[] @relation("EventHost")
-  eventsAttended Attendee[] 
-  blogs Blog[] @relation("BlogAuthor")
-
-} 
+model User {
+  id               String             @id @default(cuid())
+  email            String             @unique
+  name             String
+  phone            String?            @unique
+  oauthProvider    String?
+  oauthId          String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  password         String
+  role             Role               @default(USER)
+  profile          Profile?
+  following        Follow[]           @relation("follower")
+  followers        Follow[]           @relation("following")
+  posts            Post[]
+  comments         Comment[]
+  notifications    Notification[]
+  eventsHosted     Event[]            @relation("EventHost")
+  eventsAttended   Attendee[]
+  blogs            Blog[]             @relation("BlogAuthor")
+  messagesSent     Message[]          @relation("MessageSender")
+  messagesReceived Message[]          @relation("MessageReceiver")
+  groups           Group[]            @relation("GroupMembers")
+  Discussion       Discussion[]
+  Project_Showcase Project_Showcase[]
+}
 
 model Profile {
-  id   String    @id @default(cuid())
-  userName  String
-  bio  String?
-  profilePublicId  String?
-  profileFormat    String?
-  profileVersion   String?
-  user     User    @relation(fields: [userId], references: [id])
-  userId   String   @unique
-  githubUrl  String?
-  portfolioUrl String?
-  skills  String[]
-  profileImageUrl String? @default("https://wallpapers-clan.com/wp-content/uploads/2022/08/default-pfp-25.jpg") 
-  
+  id              String   @id @default(cuid())
+  userName        String
+  bio             String?
+  profilePublicId String?
+  profileFormat   String?
+  profileVersion  String?
+  user            User     @relation(fields: [userId], references: [id])
+  userId          String   @unique
+  githubUrl       String?
+  portfolioUrl    String?
+  skills          String[]
+  profileImageUrl String?  @default("https://wallpapers-clan.com/wp-content/uploads/2022/08/default-pfp-25.jpg")
 }
-
 
 model Follow {
-  id      String  @id @default(cuid())
-  follower User  @relation("follower", fields: [followerId], references: [id])
+  id          String   @id @default(cuid())
+  follower    User     @relation("follower", fields: [followerId], references: [id])
   followerId  String
-  following  User @relation("following", fields: [followingId], references: [id])
-  followingId  String
-  createdAt DateTime @default(now())
-}
+  following   User     @relation("following", fields: [followingId], references: [id])
+  followingId String
+  createdAt   DateTime @default(now())
 
+  @@unique([followerId, followingId])
+}
 
 model Post {
-  id        String   @id @default(cuid())
-  title     String
-  content   String?
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  String
-  createdAt DateTime @default(now())
-  type    PostType  @default(REGULAR)
-  imageUrl String?
-  videoUrl String?
-  codeQuery  CodeQuery?             @relation("PostToCodeQuery")
-  codeQueryId String? @unique
-  updatedAt DateTime @updatedAt
-  comments  Comment[]
-  tags      String[]
-  Claps     Int      @default(0)
-  
-  
+  id          String     @id @default(cuid())
+  title       String
+  content     String?
+  author      User       @relation(fields: [authorId], references: [id])
+  authorId    String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  type        PostType   @default(REGULAR)
+  imageUrl    String?
+  videoUrl    String?
+  codeQuery   CodeQuery? @relation("PostToCodeQuery")
+  codeQueryId String?    @unique
+  comments    Comment[]
+  tags        String[]
+  claps       Int        @default(0)
+
+  @@index([authorId])
+  @@index([createdAt])
 }
+
 model CodeQuery {
-   id              Int           @id @default(autoincrement())
-  relevantTech    String[]
-  errorDetails    Json
-  codeSnippet     String
-  post            Post?         @relation("PostToCodeQuery", fields: [postId], references: [id])
-  postId          String?       @unique
+  id           Int      @id @default(autoincrement())
+  relevantTech String[]
+  errorDetails Json
+  codeSnippet  String
+  post         Post?    @relation("PostToCodeQuery", fields: [postId], references: [id])
+  postId       String?  @unique
 }
 
 model Comment {
-  id      String   @id @default(cuid())
-  content  String
-  author   User   @relation(fields: [authorId], references: [id])
-  authorId String
-  post    Post?  @relation(fields: [postId], references: [id])
-  postId   String?
-  blog Blog? @relation(fields: [blogId], references: [id])
-  blogId String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
- 
+  id                String            @id @default(cuid())
+  content           String
+  author            User              @relation(fields: [authorId], references: [id])
+  authorId          String
+  post              Post?             @relation(fields: [postId], references: [id])
+  postId            String?
+  blog              Blog?             @relation(fields: [blogId], references: [id])
+  blogId            String?
+  discussion        Discussion?       @relation(fields: [discussionId], references: [id])
+  discussionId      String?
+  projectShowcase   Project_Showcase? @relation(fields: [projectShowcaseId], references: [id])
+  projectShowcaseId String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
 }
 
 model Notification {
-  id       String   @id @default(cuid())
-  user     User     @relation(fields: [userId], references: [id])
-  userId   String
-  type     String
-  message  String
-  read     Boolean  @default(false)
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  type      String
+  message   String
+  read      Boolean  @default(false)
   createdAt DateTime @default(now())
+
+  @@index([userId, read])
 }
 
 model Event {
   id          String      @id @default(cuid())
   title       String
   description String
-  date        DateTime
-  time        DateTime
+  dateTime    DateTime
   location    String
   eventLink   String?
   host        User        @relation("EventHost", fields: [hostId], references: [id])
   hostId      String
-  attendees   Attendee[]  @relation("EventAttendees") // Add relation name
-  status      EventStatus @default(UPCOMING) // Change to enum type
+  attendees   Attendee[]  @relation("EventAttendees")
+  status      EventStatus @default(UPCOMING)
   eventImage  String?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
@@ -146,25 +148,87 @@ model Attendee {
 }
 
 model Blog {
-  id String @id @default(cuid())
-  title String
-  content String
-  author User @relation("BlogAuthor", fields: [authorId], references: [id]) 
-  authorId String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  tags String[] 
+  id        String    @id @default(cuid())
+  title     String
+  content   String
+  author    User      @relation("BlogAuthor", fields: [authorId], references: [id])
+  authorId  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  tags      String[]
   comments  Comment[]
-  Claps     Int      @default(0)
-  imageUrl String?
-  videoUrl String?
+  claps     Int       @default(0)
+  imageUrl  String?
+  videoUrl  String?
+
+  @@index([authorId])
+  @@index([createdAt])
 }
 
+model Message {
+  id         String        @id @default(uuid())
+  group      Group?        @relation("GroupMessages", fields: [groupId], references: [id])
+  groupId    String?
+  content    String
+  sender     User          @relation("MessageSender", fields: [senderId], references: [id])
+  senderId   String
+  receiver   User?         @relation("MessageReceiver", fields: [receiverId], references: [id])
+  receiverId String?
+  imageUrl   String?
+  status     MessageStatus @default(UNDELIVERED)
+  isRead     Boolean       @default(false)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  @@index([senderId])
+  @@index([receiverId])
+  @@index([groupId])
+}
+
+model Group {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  members     User[]    @relation("GroupMembers")
+  messages    Message[] @relation("GroupMessages")
+}
+
+model Discussion {
+  id        String    @id @default(cuid())
+  title     String
+  content   String
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  comments  Comment[]
+  tags      String[]
+  upvotes   Int       @default(0)
+  downvotes Int       @default(0)
+}
+
+model Project_Showcase {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  projectLink String?
+  imageUrl    String?
+  tags        String[]
+  comments    Comment[]
+  claps       Int       @default(0)
+  videoUrl    String?
+}
 
 enum Role {
   USER
   ADMIN
-  Moderator
+  MODERATOR
 }
 
 enum PostType {
@@ -177,4 +241,9 @@ enum EventStatus {
   ONGOING
   COMPLETED
   CANCELLED
+}
+
+enum MessageStatus {
+  UNDELIVERED
+  DELIVERED
 }
