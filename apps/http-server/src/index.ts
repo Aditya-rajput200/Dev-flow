@@ -9,6 +9,7 @@ import { Userrouter } from "./routes/user";
 import PostRouter from "./routes/post";
 import BlogRouter from "./routes/blog";
 import Message_Router from "./routes/message";
+import Discussion_Router from "./routes/discussion";
 
 // Load env variables
 dotenv.config();
@@ -47,9 +48,10 @@ app.use(limiter);
 // Routes
 app.use("/api/auth", Authrouter);
 app.use("/api/user", Userrouter);
-app.use("/api/post", PostRouter);
+app.use("/api/post", PostRouter); ////>>>>>>>>>>need improvement
 app.use("/api/blog", BlogRouter);
 app.use("/api",MessageRateLimiter,Message_Router);
+app.use("/api/discussion",Discussion_Router);
 
 // Server start
 app.listen(PORT, () => {

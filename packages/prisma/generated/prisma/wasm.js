@@ -265,6 +265,17 @@ exports.Prisma.DiscussionScalarFieldEnum = {
   downvotes: 'downvotes'
 };
 
+exports.Prisma.AnswersScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  authorId: 'authorId',
+  discussionId: 'discussionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  upvotes: 'upvotes',
+  downvotes: 'downvotes'
+};
+
 exports.Prisma.Project_ShowcaseScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -340,6 +351,7 @@ exports.Prisma.ModelName = {
   Message: 'Message',
   Group: 'Group',
   Discussion: 'Discussion',
+  Answers: 'Answers',
   Project_Showcase: 'Project_Showcase'
 };
 

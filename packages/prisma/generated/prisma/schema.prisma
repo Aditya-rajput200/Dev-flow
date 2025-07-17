@@ -32,6 +32,7 @@ model User {
   messagesReceived Message[]          @relation("MessageReceiver")
   groups           Group[]            @relation("GroupMembers")
   Discussion       Discussion[]
+  Answer           Answers[]
   Project_Showcase Project_Showcase[]
 }
 
@@ -204,9 +205,23 @@ model Discussion {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   comments  Comment[]
+  Answers   Answers[] @relation("DiscussionAnswers")
   tags      String[]
   upvotes   Int       @default(0)
   downvotes Int       @default(0)
+}
+
+model Answers {
+  id           String     @id @default(cuid())
+  content      String
+  author       User       @relation(fields: [authorId], references: [id])
+  authorId     String
+  discussion   Discussion @relation("DiscussionAnswers", fields: [discussionId], references: [id])
+  discussionId String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  upvotes      Int        @default(0)
+  downvotes    Int        @default(0)
 }
 
 model Project_Showcase {
